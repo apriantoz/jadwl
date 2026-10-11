@@ -401,7 +401,7 @@ export const MasterSemesterPage: React.FC = () => {
 
         {/* Summary cards */}
         <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <div className="card w-full bg-base-100 p-5 shadow-sm">
+          <div className="card w-full bg-base-300 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-xs font-medium">Semester Aktif</p>
@@ -419,7 +419,7 @@ export const MasterSemesterPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="card w-full bg-base-100 p-5 shadow-sm">
+          <div className="card w-full bg-base-200 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-xs font-medium">Total Semester</p>
@@ -433,7 +433,7 @@ export const MasterSemesterPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="card w-full bg-base-100 p-5 shadow-sm">
+          <div className="card w-full bg-base-200 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-xs font-medium">Semester Ganjil</p>
@@ -447,7 +447,7 @@ export const MasterSemesterPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="card w-full bg-base-100 p-5 shadow-sm">
+          <div className="card w-full bg-base-200 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-xs font-medium">Semester Genap</p>
