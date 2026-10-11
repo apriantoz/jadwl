@@ -335,7 +335,7 @@ export const MasterSemesterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-full bg-slate-50/60">
+    <div className="min-h-full">
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
         {/* Header */}
         <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
@@ -347,7 +347,7 @@ export const MasterSemesterPage: React.FC = () => {
               Administrasi Akademik
             </div>
 
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Master Semester
             </h1>
 
@@ -359,21 +359,16 @@ export const MasterSemesterPage: React.FC = () => {
 
           <div className="flex items-center gap-2">
             <button
-              type="button"
               onClick={() => void fetchData()}
               title="Refresh data"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+              className="btn"
             >
               <RefreshCw
                 className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
               />
             </button>
 
-            <button
-              type="button"
-              onClick={openAddModal}
-              className="inline-flex h-10 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white shadow-sm shadow-indigo-200 transition hover:bg-indigo-700 active:scale-[0.98]"
-            >
+            <button onClick={openAddModal} className="btn">
               <Plus className="h-4 w-4" />
               Tambah Semester
             </button>
@@ -406,16 +401,14 @@ export const MasterSemesterPage: React.FC = () => {
 
         {/* Summary cards */}
         <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <div className="rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-600 to-indigo-700 p-5 text-white shadow-sm">
+          <div className="card w-full bg-base-100 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-medium text-indigo-100">
-                  Semester Aktif
-                </p>
+                <p className="text-xs font-medium">Semester Aktif</p>
                 <p className="mt-2 text-xl font-bold">
                   {activeSemester?.tipe_semester || "Belum ada"}
                 </p>
-                <p className="mt-1 text-sm text-indigo-100">
+                <p className="mt-1 text-sm">
                   {activeSemester?.tahun_ajaran || "Belum ditentukan"}
                 </p>
               </div>
@@ -426,16 +419,12 @@ export const MasterSemesterPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="card w-full bg-base-100 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-medium text-slate-500">
-                  Total Semester
-                </p>
-                <p className="mt-2 text-2xl font-bold text-slate-900">
-                  {list.length}
-                </p>
-                <p className="mt-1 text-xs text-slate-400">Periode tersimpan</p>
+                <p className="text-xs font-medium">Total Semester</p>
+                <p className="mt-2 text-2xl font-bold">{list.length}</p>
+                <p className="mt-1 text-xs">Periode tersimpan</p>
               </div>
 
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
@@ -444,16 +433,12 @@ export const MasterSemesterPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="card w-full bg-base-100 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-medium text-slate-500">
-                  Semester Ganjil
-                </p>
-                <p className="mt-2 text-2xl font-bold text-slate-900">
-                  {ganjilCount}
-                </p>
-                <p className="mt-1 text-xs text-slate-400">Periode tersimpan</p>
+                <p className="text-xs font-medium">Semester Ganjil</p>
+                <p className="mt-2 text-2xl font-bold">{ganjilCount}</p>
+                <p className="mt-1 text-xs">Periode tersimpan</p>
               </div>
 
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
@@ -462,16 +447,12 @@ export const MasterSemesterPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="card w-full bg-base-100 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-medium text-slate-500">
-                  Semester Genap
-                </p>
-                <p className="mt-2 text-2xl font-bold text-slate-900">
-                  {genapCount}
-                </p>
-                <p className="mt-1 text-xs text-slate-400">Periode tersimpan</p>
+                <p className="text-xs font-medium">Semester Genap</p>
+                <p className="mt-2 text-2xl font-bold">{genapCount}</p>
+                <p className="mt-1 text-xs">Periode tersimpan</p>
               </div>
 
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
