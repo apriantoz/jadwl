@@ -17,6 +17,7 @@ import {
   GraduationCap,
   X,
   Info,
+  SearchIcon,
 } from "lucide-react";
 
 type SemesterFormData = {
@@ -463,7 +464,7 @@ export const MasterSemesterPage: React.FC = () => {
         </div>
 
         {/* Active semester highlight */}
-        <div className="mb-6 overflow-hidden rounded-2xl border border-indigo-100 bg-white shadow-sm">
+        <div className="card w-full bg-base-200 mb-6 shadow-sm">
           <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
@@ -471,12 +472,12 @@ export const MasterSemesterPage: React.FC = () => {
               </div>
 
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
+                <p className="text-xs font-semibold uppercase tracking-wider">
                   Periode Perkuliahan Saat Ini
                 </p>
 
                 <div className="mt-1 flex flex-wrap items-center gap-2">
-                  <span className="text-lg font-bold text-slate-900">
+                  <span className="text-lg font-bold">
                     {activeSemester
                       ? `${activeSemester.tipe_semester} · ${activeSemester.tahun_ajaran}`
                       : "Belum ada semester aktif"}
@@ -503,28 +504,27 @@ export const MasterSemesterPage: React.FC = () => {
         </div>
 
         {/* Main table */}
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <div className="flex flex-col gap-4 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="card w-full bg-base-200 p-5 shadow-sm">
+          <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-sm font-bold text-slate-900">
-                Daftar Semester
-              </h2>
+              <h2 className="text-sm font-bold">Daftar Semester</h2>
 
-              <p className="mt-0.5 text-xs text-slate-500">
+              <p className="mt-0.5 text-xs">
                 Kelola periode akademik yang tersedia di sistem.
               </p>
             </div>
 
             <div className="relative w-full sm:w-72">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Cari semester atau tahun..."
-                className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-9 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:bg-white focus:ring-4 focus:ring-indigo-50"
-              />
+              <label className="input">
+                <SearchIcon className="text-neutral-400" />
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Cari semester atau tahun..."
+                  className="input transition"
+                />
+              </label>
 
               {search && (
                 <button
@@ -585,189 +585,105 @@ export const MasterSemesterPage: React.FC = () => {
               )}
             </div>
           ) : (
-            <>
-              {/* Desktop */}
-              <div className="hidden overflow-x-auto md:block">
-                <table className="w-full text-left text-sm">
-                  <thead>
-                    <tr className="border-b border-slate-100 bg-slate-50/70">
-                      <th className="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                        Semester
-                      </th>
+            <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Semester</th>
+                    <th>Tahun Ajaran</th>
+                    <th>Status</th>
+                    <th className="text-right">Aksi</th>
+                  </tr>
+                </thead>
 
-                      <th className="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                        Tahun Ajaran
-                      </th>
-
-                      <th className="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                        Status
-                      </th>
-
-                      <th className="px-5 py-3.5 text-right text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                        Aksi
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody className="divide-y divide-slate-100">
-                    {filteredList.map((item) => (
-                      <tr
-                        key={item.id}
-                        className="group transition hover:bg-slate-50/70"
-                      >
-                        <td className="px-5 py-4">
-                          <div className="flex items-center gap-3">
-                            <div
-                              className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-                                item.tipe_semester === "Ganjil"
-                                  ? "bg-amber-50 text-amber-600"
-                                  : "bg-emerald-50 text-emerald-600"
-                              }`}
-                            >
-                              <CalendarDays className="h-4 w-4" />
-                            </div>
-
-                            <div>
-                              <p className="font-semibold text-slate-900">
-                                Semester {item.tipe_semester}
-                              </p>
-
-                              <p className="mt-0.5 text-xs text-slate-400">
-                                ID #{item.id}
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-
-                        <td className="px-5 py-4">
-                          <span className="inline-flex rounded-lg bg-slate-100 px-3 py-1.5 text-sm font-semibold text-slate-700">
-                            {item.tahun_ajaran}
-                          </span>
-                        </td>
-
-                        <td className="px-5 py-4">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              void handleToggleActive(item.id, item.is_active)
-                            }
-                            title={
-                              item.is_active
-                                ? "Klik untuk menonaktifkan"
-                                : "Klik untuk mengaktifkan"
-                            }
-                            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition ${
-                              item.is_active
-                                ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
-                                : "bg-slate-100 text-slate-500 hover:bg-slate-200"
+                <tbody>
+                  {filteredList.map((item) => (
+                    <tr key={item.id} className="hover:bg-base-200/60">
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`flex h-10 w-10 items-center justify-center rounded-xl ${
+                              item.tipe_semester === "Ganjil"
+                                ? "bg-amber-50 text-amber-600"
+                                : "bg-emerald-50 text-emerald-600"
                             }`}
                           >
-                            {item.is_active ? (
-                              <CheckCircle2 className="h-3.5 w-3.5" />
-                            ) : (
-                              <Circle className="h-3.5 w-3.5" />
-                            )}
-
-                            {item.is_active ? "Aktif" : "Tidak Aktif"}
-                          </button>
-                        </td>
-
-                        <td className="px-5 py-4">
-                          <div className="flex justify-end gap-1.5 opacity-80 transition group-hover:opacity-100">
-                            <button
-                              type="button"
-                              onClick={() => openEditModal(item)}
-                              title="Edit semester"
-                              className="flex h-8 w-8 items-center justify-center rounded-lg text-indigo-600 transition hover:bg-indigo-50"
-                            >
-                              <Edit className="h-4 w-4" />
-                            </button>
-
-                            <button
-                              type="button"
-                              onClick={() => void handleDelete(item.id)}
-                              title="Hapus semester"
-                              className="flex h-8 w-8 items-center justify-center rounded-lg text-rose-600 transition hover:bg-rose-50"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </button>
+                            <CalendarDays className="h-4 w-4" />
                           </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
 
-              {/* Mobile */}
-              <div className="divide-y divide-slate-100 md:hidden">
-                {filteredList.map((item) => (
-                  <div key={item.id} className="p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex min-w-0 items-center gap-3">
-                        <div
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-                            item.tipe_semester === "Ganjil"
-                              ? "bg-amber-50 text-amber-600"
-                              : "bg-emerald-50 text-emerald-600"
+                          <div>
+                            <p className="font-semibold">
+                              Semester {item.tipe_semester}
+                            </p>
+                            <p className="mt-0.5 text-xs text-slate-400">
+                              ID #{item.id}
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <span className="badge badge-ghost font-semibold">
+                          {item.tahun_ajaran}
+                        </span>
+                      </td>
+
+                      <td>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            void handleToggleActive(item.id, item.is_active)
+                          }
+                          title={
+                            item.is_active
+                              ? "Klik untuk menonaktifkan"
+                              : "Klik untuk mengaktifkan"
+                          }
+                          className={`badge gap-1.5 font-bold ${
+                            item.is_active
+                              ? "badge-success badge-soft"
+                              : "badge-ghost"
                           }`}
                         >
-                          <CalendarDays className="h-4 w-4" />
+                          {item.is_active ? (
+                            <CheckCircle2 className="h-3.5 w-3.5" />
+                          ) : (
+                            <Circle className="h-3.5 w-3.5" />
+                          )}
+                          {item.is_active ? "Aktif" : "Tidak Aktif"}
+                        </button>
+                      </td>
+
+                      <td>
+                        <div className="flex justify-end gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => openEditModal(item)}
+                            title="Edit semester"
+                            className="btn btn-ghost btn-xs btn-square text-indigo-600"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => void handleDelete(item.id)}
+                            title="Hapus semester"
+                            className="btn btn-ghost btn-xs btn-square text-rose-600"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
                         </div>
-
-                        <div className="min-w-0">
-                          <p className="truncate text-sm font-bold text-slate-900">
-                            Semester {item.tipe_semester}
-                          </p>
-
-                          <p className="mt-0.5 text-xs text-slate-500">
-                            {item.tahun_ajaran}
-                          </p>
-                        </div>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          void handleToggleActive(item.id, item.is_active)
-                        }
-                        className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold ${
-                          item.is_active
-                            ? "bg-emerald-50 text-emerald-700"
-                            : "bg-slate-100 text-slate-500"
-                        }`}
-                      >
-                        {item.is_active ? "AKTIF" : "NONAKTIF"}
-                      </button>
-                    </div>
-
-                    <div className="mt-3 flex justify-end gap-2">
-                      <button
-                        type="button"
-                        onClick={() => openEditModal(item)}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-50 px-3 py-2 text-xs font-semibold text-indigo-700"
-                      >
-                        <Edit className="h-3.5 w-3.5" />
-                        Edit
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => void handleDelete(item.id)}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                        Hapus
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
 
           {!loading && filteredList.length > 0 && (
-            <div className="border-t border-slate-100 bg-slate-50/50 px-5 py-3">
+            <div className="px-5 py-3">
               <p className="text-xs text-slate-400">
                 Menampilkan{" "}
                 <span className="font-semibold text-slate-600">

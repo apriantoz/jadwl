@@ -10,6 +10,7 @@ import { RuanganPage } from "../pages/admin/master/RuanganPage";
 import { ProdiPage } from "../pages/admin/master/ProdiPage";
 import { MataKuliahPage } from "../pages/admin/master/MataKuliahPage";
 import { MasterLayout } from "../layouts/MasterLayout";
+import JadwalPublikPage from "../pages/JadwalPublikPage";
 
 export function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ export function AppRoutes() {
       {/* Halaman Publik */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/homepage" element={<JadwalPublikPage />} />
 
       {/* Rute yang diproteksi (Hanya bisa diakses kalau sudah login) */}
       <Route element={<ProtectedRoute />}>
