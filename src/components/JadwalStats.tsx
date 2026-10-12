@@ -15,42 +15,60 @@ export const JadwalStats: React.FC<Props> = ({
 }) => {
   return (
     <div className="mb-5 grid grid-cols-4 gap-3">
-      <div className="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-sm">
-        <p className="text-[11px] font-medium text-slate-400">
-          Semester aktif
-        </p>
-        <p className="mt-1 truncate text-sm font-bold text-slate-800">
-          {activeSemesterName}
-        </p>
+      {/* Semester Aktif */}
+      <div className="card bg-base-100 border border-base-200 shadow-sm">
+        <div className="card-body p-3.5">
+          <p className="text-[11px] font-medium text-base-content/60">
+            Semester aktif
+          </p>
+          <p className="mt-1 truncate text-sm font-bold text-base-content">
+            {activeSemesterName}
+          </p>
+        </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-sm">
-        <p className="text-[11px] font-medium text-slate-400">Jadwal tampil</p>
-        <p className="mt-1 text-xl font-bold text-slate-900">
-          {filteredCount}
-        </p>
+      {/* Jadwal Tampil */}
+      <div className="card bg-base-100 border border-base-200 shadow-sm">
+        <div className="card-body p-3.5">
+          <p className="text-[11px] font-medium text-base-content/60">
+            Jadwal tampil
+          </p>
+          <p className="mt-1 text-xl font-bold text-base-content">
+            {filteredCount}
+          </p>
+        </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-sm">
-        <p className="text-[11px] font-medium text-slate-400">
-          Ruangan terpakai
-        </p>
-        <p className="mt-1 text-xl font-bold text-slate-900">{roomsInUse}</p>
+      {/* Ruangan Terpakai */}
+      <div className="card bg-base-100 border border-base-200 shadow-sm">
+        <div className="card-body p-3.5">
+          <p className="text-[11px] font-medium text-base-content/60">
+            Ruangan terpakai
+          </p>
+          <p className="mt-1 text-xl font-bold text-base-content">
+            {roomsInUse}
+          </p>
+        </div>
       </div>
 
+      {/* Bentrok */}
       <div
-        className={`rounded-2xl border bg-white p-3.5 shadow-sm ${
-          totalConflict ? "border-red-200" : "border-slate-200"
+        className={`card bg-base-100 border shadow-sm ${
+          totalConflict ? "border-error/40 bg-error/5" : "border-base-200"
         }`}
       >
-        <p className="text-[11px] font-medium text-slate-400">Bentrok</p>
-        <p
-          className={`mt-1 text-xl font-bold ${
-            totalConflict ? "text-red-600" : "text-slate-900"
-          }`}
-        >
-          {totalConflict}
-        </p>
+        <div className="card-body p-3.5">
+          <p className="text-[11px] font-medium text-base-content/60">
+            Bentrok
+          </p>
+          <p
+            className={`mt-1 text-xl font-bold ${
+              totalConflict ? "text-error" : "text-base-content"
+            }`}
+          >
+            {totalConflict}
+          </p>
+        </div>
       </div>
     </div>
   );

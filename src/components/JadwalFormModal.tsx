@@ -9,7 +9,7 @@ import {
   Search,
   X,
 } from "lucide-react";
-import { DAYS, INPUT_CLASS } from "../types/constants";
+import { DAYS } from "../types/constants";
 import type { DropdownOption } from "../types/types";
 
 export interface JadwalFormValues {
@@ -74,15 +74,16 @@ export const JadwalFormModal: React.FC<Props> = ({
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto bg-slate-950/50 p-4 backdrop-blur-sm"
+      className="modal modal-open bg-base-950/50 backdrop-blur-sm"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget && !submitting) onClose();
       }}
     >
-      <div className="my-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+      <div className="modal-box max-w-2xl bg-base-100 p-0 shadow-2xl border border-base-200">
+        {/* Header Modal */}
+        <div className="flex items-center justify-between border-b border-base-200 px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
               {isEditing ? (
                 <Edit className="h-5 w-5" />
               ) : (
@@ -90,10 +91,10 @@ export const JadwalFormModal: React.FC<Props> = ({
               )}
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-base-content">
                 {isEditing ? "Edit Jadwal" : "Tambah Jadwal Baru"}
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-base-content/60">
                 Atur mata kuliah, ruang, waktu, dan semester.
               </p>
             </div>
@@ -103,7 +104,7 @@ export const JadwalFormModal: React.FC<Props> = ({
             type="button"
             onClick={() => !submitting && onClose()}
             disabled={submitting}
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-100 disabled:opacity-50"
+            className="btn btn-ghost btn-sm btn-square text-base-content/60 hover:bg-base-200"
           >
             <X className="h-5 w-5" />
           </button>
@@ -112,53 +113,60 @@ export const JadwalFormModal: React.FC<Props> = ({
         <form onSubmit={onSubmit}>
           <div className="max-h-[70vh] overflow-y-auto px-6 py-5">
             {formError && (
-              <div className="mb-4 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-medium text-red-700">
+              <div
+                role="alert"
+                className="alert alert-error mb-4 text-xs font-medium py-3"
+              >
                 <AlertTriangle className="h-4 w-4 shrink-0" />
                 <span>{formError}</span>
               </div>
             )}
 
             <div className="mb-5">
-              <h3 className="text-sm font-bold text-slate-800">
+              <h3 className="text-sm font-bold text-base-content">
                 Informasi Akademik
               </h3>
-              <p className="mt-0.5 text-xs text-slate-400">
+              <p className="mt-0.5 text-xs text-base-content/60">
                 Pilih mata kuliah, ruangan, dan semester.
               </p>
             </div>
 
             {/* MK SEARCH */}
-            <div className="mb-4">
-              <label className="mb-1.5 block text-xs font-semibold text-slate-600">
-                Mata Kuliah
+            <div className="form-control mb-4">
+              <label className="label pt-0 pb-1.5">
+                <span className="label-text text-xs font-semibold text-base-content/80">
+                  Mata Kuliah
+                </span>
               </label>
               <div className="relative">
                 <div className="relative">
-                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-                  <input
-                    required
-                    autoComplete="off"
-                    value={mkOpen ? mkSearch : selectedMk?.nama || ""}
-                    onFocus={() => {
-                      setMkOpen(true);
-                      setMkSearch(selectedMk?.nama || "");
-                    }}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setMkSearch(value);
-                      setMkOpen(true);
-                      if (selectedMk && value !== selectedMk.nama) {
-                        set("mk_id", "");
-                      }
-                    }}
-                    placeholder="Cari mata kuliah..."
-                    className={`${INPUT_CLASS} pl-9 pr-9`}
-                  />
-                  <ChevronDown
-                    className={`pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 transition ${
-                      mkOpen ? "rotate-180" : ""
-                    }`}
-                  />
+                  <label className="input w-full">
+                    <Search className="text-base-content/40" />
+                    <input
+                      required
+                      autoComplete="off"
+                      value={mkOpen ? mkSearch : selectedMk?.nama || ""}
+                      onFocus={() => {
+                        setMkOpen(true);
+                        setMkSearch(selectedMk?.nama || "");
+                      }}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setMkSearch(value);
+                        setMkOpen(true);
+                        if (selectedMk && value !== selectedMk.nama) {
+                          set("mk_id", "");
+                        }
+                      }}
+                      placeholder="Cari mata kuliah..."
+                      className="input"
+                    />
+                    <ChevronDown
+                      className={`pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-base-content/40 transition ${
+                        mkOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </label>
                 </div>
 
                 {mkOpen && (
@@ -168,7 +176,7 @@ export const JadwalFormModal: React.FC<Props> = ({
                       className="fixed inset-0 z-10 cursor-default"
                       onClick={() => setMkOpen(false)}
                     />
-                    <div className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl">
+                    <div className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded-xl border border-base-200 bg-base-100 p-1.5 shadow-xl">
                       {filteredMkOptions.length > 0 ? (
                         filteredMkOptions.map((option) => (
                           <button
@@ -180,17 +188,17 @@ export const JadwalFormModal: React.FC<Props> = ({
                               setMkSearch(option.nama);
                               setMkOpen(false);
                             }}
-                            className={`w-full rounded-lg px-3 py-2 text-left text-xs hover:bg-indigo-50 ${
+                            className={`w-full rounded-lg px-3 py-2 text-left text-xs hover:bg-primary/10 ${
                               String(option.id) === formData.mk_id
-                                ? "bg-indigo-50 font-semibold text-indigo-700"
-                                : "text-slate-700"
+                                ? "bg-primary/10 font-semibold text-primary"
+                                : "text-base-content"
                             }`}
                           >
                             {option.nama}
                           </button>
                         ))
                       ) : (
-                        <div className="px-3 py-4 text-center text-xs text-slate-400">
+                        <div className="px-3 py-4 text-center text-xs text-base-content/40">
                           Mata kuliah tidak ditemukan.
                         </div>
                       )}
@@ -202,15 +210,17 @@ export const JadwalFormModal: React.FC<Props> = ({
 
             {/* RUANG + SEMESTER */}
             <div className="mb-5 grid grid-cols-2 gap-4">
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold text-slate-600">
-                  Ruangan
+              <div className="form-control">
+                <label className="label pt-0 pb-1.5">
+                  <span className="label-text text-xs font-semibold text-base-content/80">
+                    Ruangan
+                  </span>
                 </label>
                 <select
                   required
                   value={formData.ruang_id}
                   onChange={(e) => set("ruang_id", e.target.value)}
-                  className={INPUT_CLASS}
+                  className="select w-full"
                 >
                   <option value="" disabled>
                     -- Pilih Ruang --
@@ -223,15 +233,17 @@ export const JadwalFormModal: React.FC<Props> = ({
                 </select>
               </div>
 
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold text-slate-600">
-                  Semester
+              <div className="form-control">
+                <label className="label pt-0 pb-1.5">
+                  <span className="label-text text-xs font-semibold text-base-content/80">
+                    Semester
+                  </span>
                 </label>
                 <select
                   required
                   value={formData.master_semester_id}
                   onChange={(e) => set("master_semester_id", e.target.value)}
-                  className={INPUT_CLASS}
+                  className="select w-full"
                 >
                   <option value="" disabled>
                     -- Pilih Semester --
@@ -246,24 +258,26 @@ export const JadwalFormModal: React.FC<Props> = ({
             </div>
 
             {/* WAKTU */}
-            <div className="mb-5 border-t border-slate-100 pt-5">
-              <h3 className="text-sm font-bold text-slate-800">
+            <div className="mb-5 border-t border-base-200 pt-5">
+              <h3 className="text-sm font-bold text-base-content">
                 Waktu Perkuliahan
               </h3>
-              <p className="mt-0.5 text-xs text-slate-400">
+              <p className="mt-0.5 text-xs text-base-content/60">
                 Tentukan hari dan rentang waktu.
               </p>
             </div>
 
             <div className="mb-5 grid grid-cols-3 gap-4">
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold text-slate-600">
-                  Hari
+              <div className="form-control">
+                <label className="label pt-0 pb-1.5">
+                  <span className="label-text text-xs font-semibold text-base-content/80">
+                    Hari
+                  </span>
                 </label>
                 <select
                   value={formData.hari}
                   onChange={(e) => set("hari", e.target.value)}
-                  className={INPUT_CLASS}
+                  className="select w-full"
                 >
                   {DAYS.map((day) => (
                     <option key={day}>{day}</option>
@@ -271,66 +285,75 @@ export const JadwalFormModal: React.FC<Props> = ({
                 </select>
               </div>
 
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold text-slate-600">
-                  Jam Mulai
+              <div className="form-control">
+                <label className="label pt-0 pb-1.5">
+                  <span className="label-text text-xs font-semibold text-base-content/80">
+                    Jam Mulai
+                  </span>
                 </label>
                 <input
                   required
                   type="time"
                   value={formData.jam_mulai}
                   onChange={(e) => set("jam_mulai", e.target.value)}
-                  className={INPUT_CLASS}
+                  className="input w-full"
                 />
               </div>
 
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold text-slate-600">
-                  Jam Selesai
+              <div className="form-control">
+                <label className="label pt-0 pb-1.5">
+                  <span className="label-text text-xs font-semibold text-base-content/80">
+                    Jam Selesai
+                  </span>
                 </label>
                 <input
                   required
                   type="time"
                   value={formData.jam_selesai}
                   onChange={(e) => set("jam_selesai", e.target.value)}
-                  className={INPUT_CLASS}
+                  className="input w-full"
                 />
               </div>
             </div>
 
             {/* CATATAN */}
-            <div className="border-t border-slate-100 pt-5">
-              <label className="mb-1.5 block text-xs font-semibold text-slate-600">
-                Catatan{" "}
-                <span className="font-normal text-slate-400">(opsional)</span>
+            <div className="form-control border-t border-base-200 pt-5">
+              <label className="label pt-0 pb-1.5">
+                <span className="label-text text-xs font-semibold text-base-content/80">
+                  Catatan{" "}
+                  <span className="font-normal text-base-content/40">
+                    (opsional)
+                  </span>
+                </span>
               </label>
               <textarea
                 rows={3}
                 value={formData.catatan}
                 onChange={(e) => set("catatan", e.target.value)}
                 placeholder="Tambahkan informasi tambahan..."
-                className={`${INPUT_CLASS} resize-none`}
+                className="textarea w-full resize-none"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 border-t border-slate-100 bg-slate-50/70 px-6 py-4">
+          {/* Footer Modal */}
+          <div className="flex justify-end gap-2 border-t border-base-200 bg-base-200/50 px-6 py-4 modal-action mt-0">
             <button
               type="button"
               onClick={() => !submitting && onClose()}
               disabled={submitting}
-              className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+              className="btn btn-sm btn-ghost border border-base-300 font-semibold text-base-content/70"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
+              className="btn btn-sm btn-primary gap-2 text-white"
             >
               {submitting ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <span className="loading loading-spinner loading-xs"></span>
                   Menyimpan...
                 </>
               ) : (

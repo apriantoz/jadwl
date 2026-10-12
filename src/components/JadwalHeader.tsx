@@ -7,24 +7,28 @@ interface Props {
   onAdd: () => void;
 }
 
-export const JadwalHeader: React.FC<Props> = ({ loading, onRefresh, onAdd }) => {
+export const JadwalHeader: React.FC<Props> = ({
+  loading,
+  onRefresh,
+  onAdd,
+}) => {
   return (
     <header className="mb-5 flex items-end justify-between gap-4">
       <div>
         <div className="mb-2 flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <CalendarDays className="h-4 w-4" />
           </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+          <span className="text-xs font-bold uppercase tracking-wider text-primary">
             Schedule Workspace
           </span>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+        <h1 className="text-3xl font-bold tracking-tight text-base-content">
           Kelola Jadwal
         </h1>
 
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-base-content/60">
           Atur jadwal dengan cepat tanpa harus berhadapan dengan tabel yang
           terlalu padat.
         </p>
@@ -35,7 +39,7 @@ export const JadwalHeader: React.FC<Props> = ({ loading, onRefresh, onAdd }) => 
           type="button"
           onClick={onRefresh}
           disabled={loading}
-          className="inline-flex h-10 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-sm font-semibold text-slate-600 shadow-sm hover:bg-slate-50 disabled:opacity-60"
+          className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5 text-sm font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
         >
           <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
           Refresh
@@ -44,7 +48,7 @@ export const JadwalHeader: React.FC<Props> = ({ loading, onRefresh, onAdd }) => 
         <button
           type="button"
           onClick={onAdd}
-          className="inline-flex h-10 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white shadow-sm shadow-indigo-600/20 hover:bg-indigo-700"
+          className="btn btn-sm btn-primary h-10 gap-2 px-4 text-sm font-semibold text-white shadow-sm shadow-primary/20"
         >
           <Plus className="h-4 w-4" />
           Tambah Jadwal
