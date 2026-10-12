@@ -1,7 +1,8 @@
-//src/routes/AppRoutes.tsx
+// src/routes/AppRoutes.tsx
 import { Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
-import { ProtectedRoute } from "./ProtectedRoute"; // Import protected route
+import { ProtectedRoute } from "./ProtectedRoute";
+import { PublicOnlyRoute } from "./PublicOnlyRoute"; // <-- Import PublicOnlyRoute
 import DashboardPage from "../pages/admin/DashboardPage";
 import LandingPage from "../pages/LandingPage";
 import JadwalTable from "../pages/admin/JadwalTable";
@@ -17,8 +18,12 @@ export function AppRoutes() {
     <Routes>
       {/* Halaman Publik */}
       <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
       <Route path="/homepage" element={<JadwalPublikPage />} />
+
+      {/* Rute khusus tamu (kalau sudah login, dilarang masuk ke sini) */}
+      <Route element={<PublicOnlyRoute />}>
+        <Route path="/login" element={<LoginPage />} />
+      </Route>
 
       {/* Rute yang diproteksi (Hanya bisa diakses kalau sudah login) */}
       <Route element={<ProtectedRoute />}>
@@ -33,8 +38,6 @@ export function AppRoutes() {
           <Route path="prodi" element={<ProdiPage />} />
           <Route path="mk" element={<MataKuliahPage />} />
         </Route>
-
-        {/* Tambah rute lain di sini kalau butuh, misal /profile, /settings, dll */}
       </Route>
 
       {/* Redirect otomatis kalau akses rute ngawur */}
