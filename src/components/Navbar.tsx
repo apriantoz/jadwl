@@ -1,3 +1,4 @@
+// src/components/Navbar.tsx
 import { CalendarHeartIcon, LogOutIcon, Menu } from "lucide-react";
 import { supabase } from "../lib/supabaseClient";
 import { Link } from "react-router-dom";
@@ -15,21 +16,24 @@ function Navbar() {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Item 1</a>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
-              <a>Parent</a>
+              <span>Master Data</span>
               <ul className="p-2">
                 <li>
-                  <a>Submenu 1</a>
+                  <Link to="/master/ruangan">Ruangan</Link>
                 </li>
                 <li>
-                  <a>Submenu 2</a>
+                  <Link to="/master/prodi">Program Studi</Link>
+                </li>
+                <li>
+                  <Link to="/master/mk">Mata Kuliah</Link>
                 </li>
               </ul>
             </li>
             <li>
-              <a>Item 3</a>
+              <Link to="/jadwal">Kelola Jadwal</Link>
             </li>
           </ul>
         </div>
@@ -38,6 +42,7 @@ function Navbar() {
           JadwL
         </Link>
       </div>
+
       <div className="navbar-center hidden lg:flex">
         <button className="btn sm:hidden" popoverTarget="my-megamenu-2">
           Menu
@@ -49,60 +54,42 @@ function Navbar() {
         >
           <span className="megamenu-active"></span>
 
-          <button popoverTarget="b1">One</button>
+          <button popoverTarget="b1">Jadwal</button>
           <div id="b1" popover="auto">
             <ul className="menu menu-horizontal">
               <li>
-                <a>Enterprise</a>
-              </li>
-              <li>
-                <a>CRM software</a>
-              </li>
-              <li>
-                <a>Security</a>
-              </li>
-              <li>
-                <a>Consulting</a>
+                <Link to="/jadwal">Kelola Jadwal</Link>
               </li>
             </ul>
           </div>
 
-          <button popoverTarget="b2">Two</button>
+          <button popoverTarget="b2">Semester</button>
           <div id="b2" popover="auto">
             <ul className="menu menu-horizontal">
               <li>
-                <a>AI infrastructure</a>
-              </li>
-              <li>
-                <a>Image generation</a>
-              </li>
-              <li>
-                <a>MCP servers</a>
+                <Link to="/semester">Kelola Semester</Link>
               </li>
             </ul>
           </div>
 
-          <button popoverTarget="b3">Three</button>
+          <button popoverTarget="b3">Master Data</button>
           <div id="b3" popover="auto">
             <ul className="menu menu-horizontal">
               <li>
-                <a>Cloud computing</a>
+                <Link to="/master/ruangan">Ruangan</Link>
               </li>
               <li>
-                <a>Storage solutions</a>
+                <Link to="/master/prodi">Program Studi</Link>
               </li>
               <li>
-                <a>Database services</a>
-              </li>
-              <li>
-                <a>CDN performance</a>
+                <Link to="/master/mk">Mata Kuliah</Link>
               </li>
             </ul>
           </div>
         </div>
       </div>
+
       <div className="navbar-end">
-        {/* Tombol logout gampang */}
         <button
           onClick={async () => {
             await supabase.auth.signOut();
