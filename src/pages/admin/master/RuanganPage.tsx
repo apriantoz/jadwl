@@ -158,13 +158,13 @@ export const RuanganPage: React.FC = () => {
   return (
     <>
       {/* Toolbar */}
-      <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+      <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end mb-5">
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={fetchData}
             disabled={loading}
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5 text-sm font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
             title="Refresh data"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
@@ -173,7 +173,7 @@ export const RuanganPage: React.FC = () => {
           <button
             type="button"
             onClick={handleOpenAdd}
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+            className="btn btn-sm btn-primary h-10 gap-2 px-4 text-sm font-semibold text-white shadow-sm shadow-primary/20"
           >
             <Plus className="h-4 w-4" />
             Tambah Ruangan
@@ -182,13 +182,16 @@ export const RuanganPage: React.FC = () => {
       </section>
 
       {error && (
-        <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+        <div
+          role="alert"
+          className="alert alert-error mb-5 text-xs font-medium py-3"
+        >
+          <AlertTriangle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
           <button
             type="button"
             onClick={() => setError("")}
-            className="ml-auto rounded-md p-0.5 hover:bg-red-100"
+            className="btn btn-ghost btn-xs btn-square ml-auto"
             title="Tutup"
           >
             <X className="h-4 w-4" />
@@ -197,172 +200,174 @@ export const RuanganPage: React.FC = () => {
       )}
 
       {/* Content */}
-      <section className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm mt-6">
-        <div className="flex flex-col gap-4 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <section className="card bg-base-100 border border-base-200 shadow-sm overflow-hidden">
+        <div className="card-body p-4 sm:p-5 border-b border-base-200 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="font-bold text-slate-900">Data Ruangan</h2>
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-500">
+              <h2 className="card-title text-sm font-bold text-base-content">
+                Data Ruangan
+              </h2>
+              <span className="badge badge-ghost badge-sm font-semibold">
                 {filtered.length}
                 {search ? ` / ${ruangList.length}` : ""}
               </span>
             </div>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-0.5 text-xs text-base-content/60">
               Daftar ruangan dan kapasitas yang tersedia.
             </p>
           </div>
 
           <div className="relative w-full sm:w-72">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Cari ruangan..."
-              className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-9 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-            />
-            {search && (
-              <button
-                type="button"
-                onClick={() => setSearch("")}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 hover:bg-slate-200 hover:text-slate-600"
-              >
-                <X className="h-3.5 w-3.5" />
-              </button>
-            )}
+            <label className="input input-bordered input-sm w-full flex items-center gap-2">
+              <Search className="h-4 w-4 text-base-content/40 shrink-0" />
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Cari ruangan..."
+                className="grow border-0 bg-transparent focus:outline-none text-xs"
+              />
+            </label>
           </div>
         </div>
 
-        {loading ? (
-          <div className="flex min-h-80 flex-col items-center justify-center text-slate-500">
-            <Loader2 className="h-7 w-7 animate-spin text-indigo-600" />
-            <p className="mt-3 text-sm">Memuat data ruangan...</p>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="flex min-h-72 flex-col items-center justify-center px-6 text-center">
-            <div className="rounded-2xl bg-slate-100 p-4 text-slate-400">
-              <Layers3 className="h-6 w-6" />
+        <div className="card-body p-0">
+          {loading ? (
+            <div className="flex min-h-[320px] flex-col items-center justify-center">
+              <span className="loading loading-spinner loading-md text-primary"></span>
+              <p className="mt-3 text-sm font-semibold text-base-content/70">
+                Memuat data ruangan...
+              </p>
             </div>
-            <p className="mt-4 text-sm font-semibold text-slate-700">
-              {search ? "Data tidak ditemukan" : "Belum ada data ruangan"}
-            </p>
-            <p className="mt-1 max-w-sm text-xs leading-5 text-slate-400">
-              {search
-                ? `Tidak ada data yang cocok dengan "${search}".`
-                : "Tambahkan ruangan pertama Anda untuk memulai."}
-            </p>
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[650px] text-left text-sm">
-              <thead className="border-b border-slate-100 bg-slate-50/70">
-                <tr className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                  <th className="px-6 py-3.5">Nama Ruangan</th>
-                  <th className="px-6 py-3.5">Tipe</th>
-                  <th className="px-6 py-3.5">Kapasitas</th>
-                  <th className="px-6 py-3.5 text-right">Aksi</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {filtered.map((r) => (
-                  <tr key={r.id} className="transition hover:bg-slate-50/70">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-                          <MapPin className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <p className="font-semibold text-slate-900">
-                            {r.nama_ruang}
-                          </p>
-                          <p className="mt-0.5 text-xs text-slate-400">
-                            ID #{r.id}
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="inline-flex rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
-                        {r.tipe_ruang?.tipe_ruang || "-"}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="inline-flex items-center gap-1.5 text-slate-600">
-                        <Users className="h-3.5 w-3.5 text-slate-400" />
-                        {r.kapasitas ? `${r.kapasitas} kursi` : "-"}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center justify-end gap-1">
-                        <button
-                          type="button"
-                          onClick={() => handleOpenEdit(r)}
-                          className="rounded-lg p-2 text-slate-400 transition hover:bg-indigo-50 hover:text-indigo-600"
-                          title="Edit"
-                        >
-                          <Edit3 className="h-4 w-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(r.id)}
-                          className="rounded-lg p-2 text-slate-400 transition hover:bg-red-50 hover:text-red-600"
-                          title="Hapus"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </td>
+          ) : filtered.length === 0 ? (
+            <div className="flex min-h-[320px] flex-col items-center justify-center px-6 text-center py-12">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-base-200 text-base-content/40">
+                <Layers3 className="h-7 w-7" />
+              </div>
+              <p className="mt-4 font-semibold text-base-content">
+                {search ? "Data tidak ditemukan" : "Belum ada data ruangan"}
+              </p>
+              <p className="mt-1 max-w-sm text-xs leading-5 text-base-content/60">
+                {search
+                  ? `Tidak ada data yang cocok dengan "${search}".`
+                  : "Tambahkan ruangan pertama Anda untuk memulai."}
+              </p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th className="text-xs">Nama Ruangan</th>
+                    <th className="text-xs">Tipe</th>
+                    <th className="text-xs">Kapasitas</th>
+                    <th className="text-xs text-right">Aksi</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                </thead>
+                <tbody className="divide-y divide-base-200">
+                  {filtered.map((r) => (
+                    <tr key={r.id} className="hover:bg-base-200/50">
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                            <MapPin className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-base-content">
+                              {r.nama_ruang}
+                            </p>
+                            <p className="text-[10px] text-base-content/50">
+                              ID #{r.id}
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span className="badge badge-ghost badge-sm font-medium">
+                          {r.tipe_ruang?.tipe_ruang || "-"}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="inline-flex items-center gap-1.5 text-xs text-base-content/70">
+                          <Users className="h-3.5 w-3.5 text-base-content/40" />
+                          {r.kapasitas ? `${r.kapasitas} kursi` : "-"}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="flex items-center justify-end gap-0.5">
+                          <button
+                            type="button"
+                            onClick={() => handleOpenEdit(r)}
+                            className="btn btn-ghost btn-square btn-sm text-primary hover:bg-primary/10"
+                            title="Edit"
+                          >
+                            <Edit3 className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(r.id)}
+                            className="btn btn-ghost btn-square btn-sm text-error hover:bg-error/10"
+                            title="Hapus"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
 
         {!loading && filtered.length > 0 && (
-          <div className="border-t border-slate-100 bg-slate-50/50 px-6 py-3">
-            <p className="text-xs text-slate-400">
-              Menampilkan{" "}
-              <span className="font-semibold text-slate-600">
-                {filtered.length}
-              </span>{" "}
-              ruangan
-              {search && ` dari ${ruangList.length} data`}
-            </p>
+          <div className="border-t border-base-200 bg-base-200/40 px-5 py-3 text-xs text-base-content/60">
+            Menampilkan{" "}
+            <span className="font-semibold text-base-content">
+              {filtered.length}
+            </span>{" "}
+            ruangan
+            {search && ` dari ${ruangList.length} data`}
           </div>
         )}
       </section>
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm">
-          <div className="flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
+        <div
+          className="modal modal-open bg-base-950/50 backdrop-blur-sm"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget && !submitting)
+              setShowModal(false);
+          }}
+        >
+          <div className="modal-box max-w-lg bg-base-100 p-0 shadow-2xl border border-base-200">
+            <div className="flex items-center justify-between border-b border-base-200 px-6 py-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-primary">
                   {isEditing ? "Perbarui Data" : "Data Baru"}
                 </p>
-                <h2 className="mt-1 text-lg font-bold text-slate-900">
+                <h2 className="text-base font-bold text-base-content">
                   {isEditing ? "Edit Ruangan" : "Tambah Ruangan"}
                 </h2>
               </div>
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="rounded-xl p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                className="btn btn-ghost btn-sm btn-square text-base-content/60 hover:bg-base-200"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="overflow-y-auto p-5 sm:p-6"
-            >
-              <div className="space-y-5">
-                <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-slate-700">
-                    Nama Ruangan
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-4 px-6 py-5 max-h-[70vh] overflow-y-auto">
+                <div className="form-control">
+                  <label className="label pt-0 pb-1.5">
+                    <span className="label-text text-xs font-semibold text-base-content/80">
+                      Nama Ruangan
+                    </span>
                   </label>
                   <input
                     type="text"
@@ -372,14 +377,16 @@ export const RuanganPage: React.FC = () => {
                     onChange={(e) =>
                       setForm({ ...form, nama_ruang: e.target.value })
                     }
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                    className="input input-bordered input-sm w-full text-xs"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-1.5 block text-xs font-semibold text-slate-700">
-                      Tipe Ruang
+                  <div className="form-control">
+                    <label className="label pt-0 pb-1.5">
+                      <span className="label-text text-xs font-semibold text-base-content/80">
+                        Tipe Ruang
+                      </span>
                     </label>
                     <select
                       required
@@ -387,9 +394,11 @@ export const RuanganPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, tipe_ruang_id: e.target.value })
                       }
-                      className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                      className="select select-bordered select-sm w-full text-xs"
                     >
-                      <option value="">- Pilih Tipe -</option>
+                      <option value="" disabled>
+                        -- Pilih Tipe --
+                      </option>
                       {tipeRuangList.map((t) => (
                         <option key={t.id} value={t.id}>
                           {t.tipe_ruang}
@@ -398,9 +407,11 @@ export const RuanganPage: React.FC = () => {
                     </select>
                   </div>
 
-                  <div>
-                    <label className="mb-1.5 block text-xs font-semibold text-slate-700">
-                      Kapasitas Kursi
+                  <div className="form-control">
+                    <label className="label pt-0 pb-1.5">
+                      <span className="label-text text-xs font-semibold text-base-content/80">
+                        Kapasitas Kursi
+                      </span>
                     </label>
                     <input
                       type="number"
@@ -410,28 +421,28 @@ export const RuanganPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, kapasitas: e.target.value })
                       }
-                      className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                      className="input input-bordered input-sm w-full text-xs"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 flex items-center justify-end gap-2 border-t border-slate-100 pt-4">
+              <div className="flex justify-end gap-2 border-t border-base-200 bg-base-200/50 px-6 py-3.5 modal-action mt-0">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-200"
+                  className="btn btn-sm btn-ghost border border-base-300 font-semibold text-base-content/70"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="btn btn-sm btn-primary gap-2 text-white"
                 >
                   {submitting ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span className="loading loading-spinner loading-xs"></span>
                       Menyimpan...
                     </>
                   ) : (

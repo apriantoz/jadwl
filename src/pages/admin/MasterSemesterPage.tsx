@@ -17,7 +17,6 @@ import {
   GraduationCap,
   X,
   Info,
-  SearchIcon,
 } from "lucide-react";
 
 type SemesterFormData = {
@@ -341,18 +340,18 @@ export const MasterSemesterPage: React.FC = () => {
         {/* Header */}
         <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-indigo-600">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-50">
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
                 <GraduationCap className="h-4 w-4" />
               </span>
               Administrasi Akademik
             </div>
 
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl text-base-content">
               Master Semester
             </h1>
 
-            <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-base-content/60">
               Atur periode semester dan tentukan semester yang sedang aktif
               untuk operasional akademik.
             </p>
@@ -360,16 +359,23 @@ export const MasterSemesterPage: React.FC = () => {
 
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={() => void fetchData()}
+              disabled={loading}
               title="Refresh data"
-              className="btn"
+              className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5 text-sm font-semibold text-base-content/70 shadow-sm hover:bg-base-200"
             >
               <RefreshCw
                 className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
               />
+              Refresh
             </button>
 
-            <button onClick={openAddModal} className="btn">
+            <button
+              type="button"
+              onClick={openAddModal}
+              className="btn btn-sm btn-primary h-10 gap-2 px-4 text-sm font-semibold text-white shadow-sm shadow-primary/20"
+            >
               <Plus className="h-4 w-4" />
               Tambah Semester
             </button>
@@ -380,321 +386,302 @@ export const MasterSemesterPage: React.FC = () => {
         {errorMessage && (
           <div
             role="alert"
-            className="mb-6 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700"
+            className="alert alert-error mb-6 text-xs font-medium py-3"
           >
-            <Info className="mt-0.5 h-4 w-4 shrink-0" />
-
-            <div className="min-w-0 flex-1">
-              <p className="font-semibold">Terjadi kesalahan</p>
-              <p className="mt-1 break-words">{errorMessage}</p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setErrorMessage("")}
-              aria-label="Tutup pesan kesalahan"
-              className="rounded-md p-1 hover:bg-rose-100"
-            >
-              <X className="h-4 w-4" />
-            </button>
+            <Info className="h-4 w-4 shrink-0" />
+            <span>{errorMessage}</span>
           </div>
         )}
 
         {/* Summary cards */}
-        <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <div className="card w-full bg-base-300 p-5 shadow-sm">
-            <div className="flex items-start justify-between">
+        <div className="mb-6 grid grid-cols-2 gap-3 xl:grid-cols-4">
+          <div className="card bg-base-100 border border-base-200 shadow-sm">
+            <div className="card-body p-3.5 flex flex-row items-start justify-between">
               <div>
-                <p className="text-xs font-medium">Semester Aktif</p>
-                <p className="mt-2 text-xl font-bold">
+                <p className="text-[11px] font-medium text-base-content/60">
+                  Semester Aktif
+                </p>
+                <p className="mt-1 text-sm font-bold text-base-content truncate">
                   {activeSemester?.tipe_semester || "Belum ada"}
                 </p>
-                <p className="mt-1 text-sm">
+                <p className="mt-0.5 text-xs text-base-content/50">
                   {activeSemester?.tahun_ajaran || "Belum ditentukan"}
                 </p>
               </div>
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                <Sparkles className="h-5 w-5" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <Sparkles className="h-4 w-4" />
               </div>
             </div>
           </div>
 
-          <div className="card w-full bg-base-200 p-5 shadow-sm">
-            <div className="flex items-start justify-between">
+          <div className="card bg-base-100 border border-base-200 shadow-sm">
+            <div className="card-body p-3.5 flex flex-row items-start justify-between">
               <div>
-                <p className="text-xs font-medium">Total Semester</p>
-                <p className="mt-2 text-2xl font-bold">{list.length}</p>
-                <p className="mt-1 text-xs">Periode tersimpan</p>
+                <p className="text-[11px] font-medium text-base-content/60">
+                  Total Semester
+                </p>
+                <p className="mt-1 text-xl font-bold text-base-content">
+                  {list.length}
+                </p>
+                <p className="mt-0.5 text-xs text-base-content/50">
+                  Periode tersimpan
+                </p>
               </div>
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-                <CalendarDays className="h-5 w-5" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-base-200 text-base-content/60">
+                <CalendarDays className="h-4 w-4" />
               </div>
             </div>
           </div>
 
-          <div className="card w-full bg-base-200 p-5 shadow-sm">
-            <div className="flex items-start justify-between">
+          <div className="card bg-base-100 border border-base-200 shadow-sm">
+            <div className="card-body p-3.5 flex flex-row items-start justify-between">
               <div>
-                <p className="text-xs font-medium">Semester Ganjil</p>
-                <p className="mt-2 text-2xl font-bold">{ganjilCount}</p>
-                <p className="mt-1 text-xs">Periode tersimpan</p>
+                <p className="text-[11px] font-medium text-base-content/60">
+                  Semester Ganjil
+                </p>
+                <p className="mt-1 text-xl font-bold text-base-content">
+                  {ganjilCount}
+                </p>
+                <p className="mt-0.5 text-xs text-base-content/50">
+                  Periode tersimpan
+                </p>
               </div>
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                <Circle className="h-5 w-5" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-warning/10 text-warning">
+                <Circle className="h-4 w-4" />
               </div>
             </div>
           </div>
 
-          <div className="card w-full bg-base-200 p-5 shadow-sm">
-            <div className="flex items-start justify-between">
+          <div className="card bg-base-100 border border-base-200 shadow-sm">
+            <div className="card-body p-3.5 flex flex-row items-start justify-between">
               <div>
-                <p className="text-xs font-medium">Semester Genap</p>
-                <p className="mt-2 text-2xl font-bold">{genapCount}</p>
-                <p className="mt-1 text-xs">Periode tersimpan</p>
+                <p className="text-[11px] font-medium text-base-content/60">
+                  Semester Genap
+                </p>
+                <p className="mt-1 text-xl font-bold text-base-content">
+                  {genapCount}
+                </p>
+                <p className="mt-0.5 text-xs text-base-content/50">
+                  Periode tersimpan
+                </p>
               </div>
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                <CheckCircle2 className="h-5 w-5" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-success/10 text-success">
+                <CheckCircle2 className="h-4 w-4" />
               </div>
             </div>
           </div>
         </div>
 
         {/* Active semester highlight */}
-        <div className="card w-full bg-base-200 mb-6 shadow-sm">
-          <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
-                <CalendarDays className="h-6 w-6" />
+        <div className="card bg-base-100 border border-base-200 mb-6 shadow-sm">
+          <div className="card-body p-4 sm:p-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <CalendarDays className="h-5 w-5" />
               </div>
 
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-base-content/60">
                   Periode Perkuliahan Saat Ini
                 </p>
 
                 <div className="mt-1 flex flex-wrap items-center gap-2">
-                  <span className="text-lg font-bold">
+                  <span className="text-base sm:text-lg font-bold text-base-content">
                     {activeSemester
                       ? `${activeSemester.tipe_semester} · ${activeSemester.tahun_ajaran}`
                       : "Belum ada semester aktif"}
                   </span>
 
                   {activeSemester && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    <div className="badge badge-success badge-sm gap-1 font-bold">
+                      <span className="h-1.5 w-1.5 rounded-full bg-success-content" />
                       AKTIF
-                    </span>
+                    </div>
                   )}
                 </div>
               </div>
             </div>
 
-            <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-3 py-2.5 text-xs text-slate-500">
-              <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
-              <span>
-                Hanya satu semester yang dapat menjadi semester aktif pada satu
-                waktu.
-              </span>
+            <div className="flex items-center gap-2 rounded-xl bg-base-200/50 px-3 py-2 text-xs text-base-content/70">
+              <Info className="h-4 w-4 shrink-0 text-base-content/40" />
+              <span>Hanya satu semester yang dapat aktif pada satu waktu.</span>
             </div>
           </div>
         </div>
 
-        {/* Main table */}
-        <div className="card w-full bg-base-200 p-5 shadow-sm">
-          <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+        {/* Main table card */}
+        <div className="card bg-base-100 border border-base-200 shadow-sm overflow-hidden">
+          <div className="card-body p-4 sm:p-5 border-b border-base-200 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-sm font-bold">Daftar Semester</h2>
-
-              <p className="mt-0.5 text-xs">
+              <h2 className="card-title text-sm font-bold text-base-content">
+                Daftar Semester
+              </h2>
+              <p className="mt-0.5 text-xs text-base-content/60">
                 Kelola periode akademik yang tersedia di sistem.
               </p>
             </div>
 
             <div className="relative w-full sm:w-72">
-              <label className="input">
-                <SearchIcon className="text-neutral-400" />
+              <label className="input input-bordered input-sm w-full flex items-center gap-2">
+                <Search className="h-4 w-4 text-base-content/40 shrink-0" />
                 <input
                   type="search"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Cari semester atau tahun..."
-                  className="input transition"
+                  className="grow border-0 bg-transparent focus:outline-none text-xs"
                 />
               </label>
-
-              {search && (
-                <button
-                  type="button"
-                  onClick={() => setSearch("")}
-                  aria-label="Hapus pencarian"
-                  className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 hover:bg-slate-200 hover:text-slate-600"
-                >
-                  <X className="h-3.5 w-3.5" />
-                </button>
-              )}
             </div>
           </div>
 
-          {loading ? (
-            <div className="flex min-h-[320px] items-center justify-center">
-              <div className="text-center">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50">
-                  <Loader2 className="h-6 w-6 animate-spin text-indigo-600" />
-                </div>
-
-                <p className="mt-3 text-sm font-medium text-slate-700">
+          <div className="card-body p-0">
+            {loading ? (
+              <div className="flex min-h-[320px] flex-col items-center justify-center">
+                <span className="loading loading-spinner loading-md text-primary"></span>
+                <p className="mt-3 text-sm font-semibold text-base-content/70">
                   Memuat data semester...
                 </p>
-
-                <p className="mt-1 text-xs text-slate-400">
-                  Mohon tunggu sebentar.
+              </div>
+            ) : filteredList.length === 0 ? (
+              <div className="flex min-h-[320px] flex-col items-center justify-center px-6 text-center py-12">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-base-200 text-base-content/40">
+                  <CalendarDays className="h-7 w-7" />
+                </div>
+                <p className="mt-4 font-semibold text-base-content">
+                  {search
+                    ? "Semester tidak ditemukan"
+                    : "Belum ada master semester"}
                 </p>
+                <p className="mt-1 max-w-sm text-xs leading-5 text-base-content/60">
+                  {search
+                    ? "Coba gunakan kata kunci atau tahun ajaran yang berbeda."
+                    : "Tambahkan periode semester pertama untuk mulai mengatur kalender akademik."}
+                </p>
+
+                {!search && (
+                  <button
+                    type="button"
+                    onClick={openAddModal}
+                    className="btn btn-primary btn-sm mt-4 gap-2 text-xs"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Tambah Semester
+                  </button>
+                )}
               </div>
-            </div>
-          ) : filteredList.length === 0 ? (
-            <div className="flex min-h-[320px] flex-col items-center justify-center px-6 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
-                <CalendarDays className="h-7 w-7" />
-              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th className="text-xs">Semester</th>
+                      <th className="text-xs">Tahun Ajaran</th>
+                      <th className="text-xs">Status</th>
+                      <th className="text-xs text-right">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredList.map((item) => (
+                      <tr key={item.id} className="hover:bg-base-200/50">
+                        <td>
+                          <div className="flex items-center gap-3">
+                            <div
+                              className={`flex h-9 w-9 items-center justify-center rounded-lg ${
+                                item.tipe_semester === "Ganjil"
+                                  ? "bg-warning/10 text-warning"
+                                  : "bg-success/10 text-success"
+                              }`}
+                            >
+                              <CalendarDays className="h-4 w-4" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-semibold text-base-content">
+                                Semester {item.tipe_semester}
+                              </p>
+                              <p className="text-[10px] text-base-content/50">
+                                ID #{item.id}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
 
-              <h3 className="mt-4 text-sm font-bold text-slate-800">
-                {search
-                  ? "Semester tidak ditemukan"
-                  : "Belum ada master semester"}
-              </h3>
+                        <td>
+                          <span className="badge badge-ghost badge-sm font-semibold">
+                            {item.tahun_ajaran}
+                          </span>
+                        </td>
 
-              <p className="mt-1 max-w-sm text-xs leading-5 text-slate-500">
-                {search
-                  ? "Coba gunakan kata kunci atau tahun ajaran yang berbeda."
-                  : "Tambahkan periode semester pertama untuk mulai mengatur kalender akademik."}
-              </p>
-
-              {!search && (
-                <button
-                  type="button"
-                  onClick={openAddModal}
-                  className="mt-4 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700"
-                >
-                  <Plus className="h-4 w-4" />
-                  Tambah Semester
-                </button>
-              )}
-            </div>
-          ) : (
-            <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Semester</th>
-                    <th>Tahun Ajaran</th>
-                    <th>Status</th>
-                    <th className="text-right">Aksi</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {filteredList.map((item) => (
-                    <tr key={item.id} className="hover:bg-base-200/60">
-                      <td>
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-                              item.tipe_semester === "Ganjil"
-                                ? "bg-amber-50 text-amber-600"
-                                : "bg-emerald-50 text-emerald-600"
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              void handleToggleActive(item.id, item.is_active)
+                            }
+                            title={
+                              item.is_active
+                                ? "Klik untuk menonaktifkan"
+                                : "Klik untuk mengaktifkan"
+                            }
+                            className={`badge badge-sm gap-1.5 font-bold cursor-pointer ${
+                              item.is_active
+                                ? "badge-success"
+                                : "badge-ghost text-base-content/50"
                             }`}
                           >
-                            <CalendarDays className="h-4 w-4" />
-                          </div>
-
-                          <div>
-                            <p className="font-semibold">
-                              Semester {item.tipe_semester}
-                            </p>
-                            <p className="mt-0.5 text-xs text-slate-400">
-                              ID #{item.id}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td>
-                        <span className="badge badge-ghost font-semibold">
-                          {item.tahun_ajaran}
-                        </span>
-                      </td>
-
-                      <td>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            void handleToggleActive(item.id, item.is_active)
-                          }
-                          title={
-                            item.is_active
-                              ? "Klik untuk menonaktifkan"
-                              : "Klik untuk mengaktifkan"
-                          }
-                          className={`badge gap-1.5 font-bold ${
-                            item.is_active
-                              ? "badge-success badge-soft"
-                              : "badge-ghost"
-                          }`}
-                        >
-                          {item.is_active ? (
-                            <CheckCircle2 className="h-3.5 w-3.5" />
-                          ) : (
-                            <Circle className="h-3.5 w-3.5" />
-                          )}
-                          {item.is_active ? "Aktif" : "Tidak Aktif"}
-                        </button>
-                      </td>
-
-                      <td>
-                        <div className="flex justify-end gap-1.5">
-                          <button
-                            type="button"
-                            onClick={() => openEditModal(item)}
-                            title="Edit semester"
-                            className="btn btn-ghost btn-xs btn-square text-indigo-600"
-                          >
-                            <Edit className="h-4 w-4" />
+                            {item.is_active ? (
+                              <CheckCircle2 className="h-3 w-3" />
+                            ) : (
+                              <Circle className="h-3 w-3" />
+                            )}
+                            {item.is_active ? "Aktif" : "Tidak Aktif"}
                           </button>
+                        </td>
 
-                          <button
-                            type="button"
-                            onClick={() => void handleDelete(item.id)}
-                            title="Hapus semester"
-                            className="btn btn-ghost btn-xs btn-square text-rose-600"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                        <td>
+                          <div className="flex justify-end gap-0.5">
+                            <button
+                              type="button"
+                              onClick={() => openEditModal(item)}
+                              className="btn btn-ghost btn-square btn-sm text-primary hover:bg-primary/10"
+                              title="Edit semester"
+                            >
+                              <Edit className="h-3.5 w-3.5" />
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => void handleDelete(item.id)}
+                              className="btn btn-ghost btn-square btn-sm text-error hover:bg-error/10"
+                              title="Hapus semester"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
 
           {!loading && filteredList.length > 0 && (
-            <div className="px-5 py-3">
-              <p className="text-xs text-slate-400">
-                Menampilkan{" "}
-                <span className="font-semibold text-slate-600">
-                  {filteredList.length}
-                </span>{" "}
-                dari{" "}
-                <span className="font-semibold text-slate-600">
-                  {list.length}
-                </span>{" "}
-                semester
-              </p>
+            <div className="px-5 py-3 border-t border-base-200 text-xs text-base-content/60">
+              Menampilkan{" "}
+              <span className="font-semibold text-base-content">
+                {filteredList.length}
+              </span>{" "}
+              dari{" "}
+              <span className="font-semibold text-base-content">
+                {list.length}
+              </span>{" "}
+              semester
             </div>
           )}
         </div>
@@ -703,58 +690,63 @@ export const MasterSemesterPage: React.FC = () => {
       {/* Modal tambah/edit */}
       {showModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm"
+          className="modal modal-open bg-base-950/50 backdrop-blur-sm"
           onMouseDown={(e) => {
             if (e.target === e.currentTarget && !submitting) {
               setShowModal(false);
             }
           }}
         >
-          <div className="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
-            <div className="border-b border-slate-100 px-6 py-5">
-              <div className="flex items-start justify-between gap-4">
+          <div className="modal-box max-w-lg bg-base-100 p-0 shadow-2xl border border-base-200">
+            <div className="flex items-center justify-between border-b border-base-200 px-6 py-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  {isEditing ? (
+                    <Edit className="h-5 w-5" />
+                  ) : (
+                    <Plus className="h-5 w-5" />
+                  )}
+                </div>
                 <div>
-                  <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                    {isEditing ? (
-                      <Edit className="h-4 w-4" />
-                    ) : (
-                      <Plus className="h-4 w-4" />
-                    )}
-                  </div>
-
-                  <h2 className="text-lg font-bold text-slate-900">
+                  <h2 className="text-base font-bold text-base-content">
                     {isEditing
                       ? "Edit Master Semester"
                       : "Tambah Master Semester"}
                   </h2>
-
-                  <p className="mt-1 text-xs leading-5 text-slate-500">
+                  <p className="text-xs text-base-content/60">
                     Tentukan tipe semester, tahun ajaran, dan status aktif.
                   </p>
                 </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (!submitting) {
-                      setShowModal(false);
-                    }
-                  }}
-                  disabled={submitting}
-                  aria-label="Tutup modal"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 disabled:opacity-50"
-                >
-                  <X className="h-4 w-4" />
-                </button>
               </div>
+
+              <button
+                type="button"
+                onClick={() => !submitting && setShowModal(false)}
+                disabled={submitting}
+                className="btn btn-ghost btn-sm btn-square text-base-content/60 hover:bg-base-200"
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
 
             <form onSubmit={handleSubmit}>
-              <div className="space-y-5 px-6 py-6">
+              <div className="space-y-4 px-6 py-5 max-h-[70vh] overflow-y-auto">
+                {errorMessage && (
+                  <div
+                    role="alert"
+                    className="alert alert-error text-xs font-medium py-2.5"
+                  >
+                    <Info className="h-4 w-4 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
                 {/* Tipe semester */}
-                <div>
-                  <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500">
-                    Tipe Semester
+                <div className="form-control">
+                  <label className="label pt-0 pb-1.5">
+                    <span className="label-text text-xs font-bold uppercase tracking-wider text-base-content/70">
+                      Tipe Semester
+                    </span>
                   </label>
 
                   <div className="grid grid-cols-2 gap-3">
@@ -773,29 +765,25 @@ export const MasterSemesterPage: React.FC = () => {
                           }
                           className={`rounded-xl border p-3 text-left transition ${
                             selected
-                              ? "border-indigo-300 bg-indigo-50 ring-2 ring-indigo-100"
-                              : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
+                              ? "border-primary bg-primary/10 ring-2 ring-primary/20"
+                              : "border-base-300 bg-base-100 hover:border-base-content/30 hover:bg-base-200/50"
                           }`}
                         >
                           <div className="flex items-center justify-between">
                             <span
-                              className={`text-sm font-bold ${
-                                selected ? "text-indigo-700" : "text-slate-700"
+                              className={`text-xs font-bold ${
+                                selected ? "text-primary" : "text-base-content"
                               }`}
                             >
                               {type}
                             </span>
-
                             <span
-                              className={`h-2.5 w-2.5 rounded-full ${
-                                type === "Ganjil"
-                                  ? "bg-amber-400"
-                                  : "bg-emerald-400"
+                              className={`h-2 w-2 rounded-full ${
+                                type === "Ganjil" ? "bg-warning" : "bg-success"
                               }`}
                             />
                           </div>
-
-                          <p className="mt-1 text-[11px] text-slate-400">
+                          <p className="mt-1 text-[10px] text-base-content/50">
                             Semester {type.toLowerCase()}
                           </p>
                         </button>
@@ -805,34 +793,33 @@ export const MasterSemesterPage: React.FC = () => {
                 </div>
 
                 {/* Tahun ajaran */}
-                <div>
-                  <label
-                    htmlFor="tahun_awal"
-                    className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500"
-                  >
-                    Tahun Ajaran
+                <div className="form-control">
+                  <label htmlFor="tahun_awal" className="label pt-0 pb-1.5">
+                    <span className="label-text text-xs font-bold uppercase tracking-wider text-base-content/70">
+                      Tahun Ajaran
+                    </span>
                   </label>
 
                   <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
-                    <div className="relative">
-                      <input
-                        id="tahun_awal"
-                        type="number"
-                        required
-                        min={2000}
-                        max={2099}
-                        step={1}
-                        placeholder="2026"
-                        value={tahunAwal}
-                        onChange={(e) => handleTahunAwalChange(e.target.value)}
-                        className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-semibold text-slate-800 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50"
-                      />
-                    </div>
+                    <input
+                      id="tahun_awal"
+                      type="number"
+                      required
+                      min={2000}
+                      max={2099}
+                      step={1}
+                      placeholder="2026"
+                      value={tahunAwal}
+                      onChange={(e) => handleTahunAwalChange(e.target.value)}
+                      className="input input-bordered input-sm w-full text-xs font-semibold"
+                    />
 
-                    <span className="text-sm font-bold text-slate-300">/</span>
+                    <span className="text-sm font-bold text-base-content/30">
+                      /
+                    </span>
 
-                    <div className="flex h-11 items-center rounded-xl border border-indigo-100 bg-indigo-50 px-3">
-                      <span className="text-sm font-bold text-indigo-700">
+                    <div className="flex h-8 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 px-3">
+                      <span className="text-xs font-bold text-primary">
                         {formData.tahun_ajaran
                           ? formData.tahun_ajaran.split("/")[1] || "—"
                           : "—"}
@@ -840,14 +827,14 @@ export const MasterSemesterPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <p className="mt-2 text-[11px] text-slate-400">
+                  <p className="mt-1 text-[10px] text-base-content/50">
                     Tahun berikutnya dibuat otomatis. Contoh: 2026 → 2026/2027.
                   </p>
                 </div>
 
                 {/* Status aktif */}
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <label className="flex cursor-pointer items-start gap-3">
+                <div className="rounded-xl border border-base-200 bg-base-200/40 p-3.5">
+                  <label className="label cursor-pointer justify-start gap-3 p-0">
                     <input
                       type="checkbox"
                       id="is_active"
@@ -858,41 +845,27 @@ export const MasterSemesterPage: React.FC = () => {
                           is_active: e.target.checked,
                         }))
                       }
-                      className="mt-0.5 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                      className="checkbox checkbox-primary checkbox-sm"
                     />
-
-                    <span>
-                      <span className="block text-sm font-semibold text-slate-800">
+                    <div>
+                      <span className="block text-xs font-semibold text-base-content">
                         Set sebagai Semester Aktif
                       </span>
-
-                      <span className="mt-0.5 block text-xs leading-5 text-slate-500">
-                        Semester aktif akan digunakan sebagai periode utama
-                        operasional akademik.
+                      <span className="block text-[10px] text-base-content/60">
+                        Digunakan sebagai periode utama operasional akademik.
                       </span>
-                    </span>
+                    </div>
                   </label>
                 </div>
               </div>
 
-              {/* Error dalam modal */}
-              {errorMessage && (
-                <div className="mx-6 mb-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs leading-5 text-rose-700">
-                  {errorMessage}
-                </div>
-              )}
-
               {/* Tombol modal */}
-              <div className="flex justify-end gap-2 border-t border-slate-100 bg-slate-50/60 px-6 py-4">
+              <div className="flex justify-end gap-2 border-t border-base-200 bg-base-200/50 px-6 py-3.5 modal-action mt-0">
                 <button
                   type="button"
-                  onClick={() => {
-                    if (!submitting) {
-                      setShowModal(false);
-                    }
-                  }}
+                  onClick={() => !submitting && setShowModal(false)}
                   disabled={submitting}
-                  className="rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 disabled:opacity-50"
+                  className="btn btn-sm btn-ghost border border-base-300 font-semibold text-base-content/70"
                 >
                   Batal
                 </button>
@@ -900,12 +873,11 @@ export const MasterSemesterPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex min-w-24 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="btn btn-sm btn-primary gap-2 text-white"
                 >
                   {submitting && (
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    <span className="loading loading-spinner loading-xs"></span>
                   )}
-
                   {submitting
                     ? "Menyimpan..."
                     : isEditing

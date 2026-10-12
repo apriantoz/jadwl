@@ -14,7 +14,7 @@ export const JadwalStats: React.FC<Props> = ({
   totalConflict,
 }) => {
   return (
-    <div className="mb-5 grid grid-cols-4 gap-3">
+    <div className="mb-5 grid grid-cols-2 md:grid-cols-4 gap-3">
       {/* Semester Aktif */}
       <div className="card bg-base-100 border border-base-200 shadow-sm">
         <div className="card-body p-3.5">
