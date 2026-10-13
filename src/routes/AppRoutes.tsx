@@ -6,19 +6,21 @@ import { PublicOnlyRoute } from "./PublicOnlyRoute"; // <-- Import PublicOnlyRou
 import DashboardPage from "../pages/admin/DashboardPage";
 import LandingPage from "../pages/LandingPage";
 import JadwalTable from "../pages/admin/JadwalTable";
-import MasterSemesterPage from "../pages/admin/MasterSemesterPage";
 import { RuanganPage } from "../pages/admin/master/RuanganPage";
 import { ProdiPage } from "../pages/admin/master/ProdiPage";
 import { MataKuliahPage } from "../pages/admin/master/MataKuliahPage";
 import { MasterLayout } from "../layouts/MasterLayout";
 import JadwalPublikPage from "../pages/JadwalPublikPage";
+import MasterSemesterPage from "../pages/admin/master/MasterSemesterPage";
 
 export function AppRoutes() {
   return (
     <Routes>
       {/* Halaman Publik */}
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/homepage" element={<JadwalPublikPage />} />
+      <Route element={<MasterLayout />}>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/homepage" element={<JadwalPublikPage />} />
+      </Route>
 
       {/* Rute khusus tamu (kalau sudah login, dilarang masuk ke sini) */}
       <Route element={<PublicOnlyRoute />}>
@@ -29,11 +31,11 @@ export function AppRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/jadwal" element={<JadwalTable />} />
-        <Route path="/semester" element={<MasterSemesterPage />} />
 
         {/* Master Data — pakai MasterLayout sebagai parent */}
         <Route path="/master" element={<MasterLayout />}>
-          <Route index element={<Navigate to="ruangan" replace />} />
+          <Route index element={<Navigate to="semester" replace />} />
+          <Route path="semester" element={<MasterSemesterPage />} />
           <Route path="ruangan" element={<RuanganPage />} />
           <Route path="prodi" element={<ProdiPage />} />
           <Route path="mk" element={<MataKuliahPage />} />

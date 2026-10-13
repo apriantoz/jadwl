@@ -152,8 +152,8 @@ const JadwalPublikPage: React.FC = () => {
   // =========================================================
 
   return (
-    <div className="min-h-screen bg-base-200/40">
-      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
+    <div>
+      <div>
         {/* ===================== HERO ===================== */}
         <header className="card mb-6 overflow-hidden border border-base-300 bg-base-100 shadow-sm">
           <div className="card-body gap-4">

@@ -338,7 +338,7 @@ const JadwalTable: React.FC = () => {
 
   return (
     <div className="min-h-full">
-      <div className="mx-auto max-w-6xl px-6 py-8 lg:px-8">
+      <div className="container mx-auto space-y-6 px-4 py-6">
         <JadwalHeader
           loading={loading}
           onRefresh={() => void refresh()}

@@ -98,7 +98,7 @@ export const JadwalFormModal: React.FC<Props> = ({
                 {isEditing ? "Edit Jadwal" : "Tambah Jadwal Baru"}
               </h2>
               <p className="text-xs text-base-content/60">
-                Atur mata kuliah, ruang, waktu, dan semester.
+                Atur mata kuliah, ruang, dan waktu perkuliahan
               </p>
             </div>
           </div>
@@ -132,7 +132,7 @@ export const JadwalFormModal: React.FC<Props> = ({
                 Informasi Akademik
               </h3>
               <p className="mt-0.5 text-xs text-base-content/60">
-                Pilih mata kuliah, ruangan, dan semester aktif.
+                Pilih mata kuliah, ruangan, dan waktu perkuliahan.
               </p>
             </div>
 
@@ -382,7 +382,7 @@ export const JadwalFormModal: React.FC<Props> = ({
             <button
               type="submit"
               disabled={submitting || activeSemesterId === null}
-              className="btn btn-sm btn-primary gap-2 text-white"
+              className="btn btn-sm btn-primary gap-2"
             >
               {submitting ? (
                 <>
