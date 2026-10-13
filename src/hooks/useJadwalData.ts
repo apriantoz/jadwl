@@ -1,3 +1,4 @@
+//src/hooks/useJadwalData.ts
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import type { DropdownOption, JadwalItem } from "../types/types";
@@ -10,92 +11,86 @@ export const useJadwalData = () => {
   const [semesterOptions, setSemesterOptions] = useState<DropdownOption[]>([]);
 
   const [activeSemesterId, setActiveSemesterId] = useState<number | null>(null);
-  const [activeSemesterName, setActiveSemesterName] =
-    useState("Semester aktif");
+  const [activeSemesterName, setActiveSemesterName] = useState(
+    "Belum ada semester aktif",
+  );
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const fetchMasterData = useCallback(async () => {
-    const [mkRes, roomRes, semRes] = await Promise.all([
-      supabase.from("mk").select("*"),
-      supabase.from("ruang").select("*"),
-      supabase.from("master_semester").select("*"),
-    ]);
-
-    if (mkRes.error) throw mkRes.error;
-    if (roomRes.error) throw roomRes.error;
-    if (semRes.error) throw semRes.error;
-
-    setMkOptions(
-      (mkRes.data || []).map((item: any) => ({
-        id: Number(item.id),
-        nama: item.nama_mk || item.nama || `MK ID ${item.id}`,
-      })),
-    );
-
-    setRuangOptions(
-      (roomRes.data || []).map((item: any) => ({
-        id: Number(item.id),
-        nama: item.nama_ruang || item.nama || `Ruang ID ${item.id}`,
-      })),
-    );
-
-    const semesters = semRes.data || [];
-
-    setSemesterOptions(
-      semesters.map((item: any) => ({
-        id: Number(item.id),
-        nama: getSemesterLabel(item),
-      })),
-    );
-
-    const active = semesters.find(
-      (item: any) =>
-        item.is_active === true ||
-        item.aktif === true ||
-        item.status === "aktif",
-    );
-
-    const fallback = active || semesters[0];
-
-    if (fallback) {
-      setActiveSemesterId(Number(fallback.id));
-      setActiveSemesterName(getSemesterLabel(fallback));
-    } else {
-      setActiveSemesterId(null);
-      setActiveSemesterName("Belum ada semester");
-    }
-  }, []);
-
-  const fetchJadwal = useCallback(async () => {
-    const { data, error: queryError } = await supabase
-      .from("view_jadwal_detail")
-      .select("*");
-
-    if (queryError) throw queryError;
-
-    setJadwalList(
-      (data || []).map((item: any) => ({
-        ...item,
-        id: item.jadwal_id ?? item.id,
-      })),
-    );
-  }, []);
 
   const refresh = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
-      await Promise.all([fetchJadwal(), fetchMasterData()]);
+      const [mkRes, roomRes, semRes] = await Promise.all([
+        supabase.from("mk").select("*"),
+        supabase.from("ruang").select("*"),
+        supabase
+          .from("master_semester")
+          .select("*")
+          .order("id", { ascending: false }),
+      ]);
+
+      if (mkRes.error) throw mkRes.error;
+      if (roomRes.error) throw roomRes.error;
+      if (semRes.error) throw semRes.error;
+
+      const semesters = semRes.data ?? [];
+      const active = semesters.find((item) => item.is_active === true);
+      const semesterId = active ? Number(active.id) : null;
+
+      setMkOptions(
+        (mkRes.data ?? []).map((item: any) => ({
+          id: Number(item.id),
+          nama: item.nama_mk || item.nama || `MK ID ${item.id}`,
+        })),
+      );
+
+      setRuangOptions(
+        (roomRes.data ?? []).map((item: any) => ({
+          id: Number(item.id),
+          nama: item.nama_ruang || item.nama || `Ruang ID ${item.id}`,
+        })),
+      );
+
+      setSemesterOptions(
+        semesters.map((item) => ({
+          id: Number(item.id),
+          nama: getSemesterLabel(item),
+        })),
+      );
+
+      setActiveSemesterId(semesterId);
+      setActiveSemesterName(
+        active ? getSemesterLabel(active) : "Belum ada semester aktif",
+      );
+
+      if (semesterId === null) {
+        setJadwalList([]);
+        return;
+      }
+
+      const { data, error: jadwalError } = await supabase
+        .from("view_jadwal_detail")
+        .select("*")
+        .eq("master_semester_id", semesterId);
+
+      if (jadwalError) throw jadwalError;
+
+      setJadwalList(
+        (data ?? []).map((item: any) => ({
+          ...item,
+          id: item.jadwal_id ?? item.id,
+        })),
+      );
     } catch (err: unknown) {
       console.error("Gagal memuat data jadwal:", err);
       setError(getErrorMessage(err, "Gagal memuat data jadwal."));
     } finally {
       setLoading(false);
     }
-  }, [fetchJadwal, fetchMasterData]);
+  }, []);
 
   useEffect(() => {
     void refresh();

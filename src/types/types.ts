@@ -1,3 +1,4 @@
+//src/types/types.ts
 import type { ScheduleItem } from "../utils/scheduleHelpers";
 
 export interface JadwalItem extends ScheduleItem {
@@ -5,6 +6,7 @@ export interface JadwalItem extends ScheduleItem {
   jadwal_id?: number;
   mk_id?: number;
   ruang_id?: number;
+  nama_ruang?: string;
   master_semester_id?: number;
   kode_mk?: string;
   nama_prodi?: string;
