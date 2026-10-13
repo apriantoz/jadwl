@@ -179,24 +179,30 @@ const JadwalTable: React.FC = () => {
     setIsEditing(false);
     setSelectedId(null);
     setFormError("");
+
     setFormData({
-      mk_id: mkOptions[0]?.id ? String(mkOptions[0].id) : "",
+      // Mata kuliah harus dipilih manual
+      mk_id: "",
+
       ruang_id:
         roomFilter !== "Semua Ruang"
           ? roomFilter
           : ruangOptions[0]?.id
             ? String(ruangOptions[0].id)
             : "",
+
       master_semester_id: activeSemesterId
         ? String(activeSemesterId)
         : semesterOptions[0]?.id
           ? String(semesterOptions[0].id)
           : "",
+
       hari: dayFilter !== "Semua Hari" ? dayFilter : "Senin",
       jam_mulai: "08:00",
       jam_selesai: "10:00",
       catatan: "",
     });
+
     setShowModal(true);
   };
 
@@ -331,7 +337,7 @@ const JadwalTable: React.FC = () => {
   // =========================================================
 
   return (
-    <div className="min-h-full bg-slate-50/60">
+    <div className="min-h-full">
       <div className="mx-auto max-w-6xl px-6 py-8 lg:px-8">
         <JadwalHeader
           loading={loading}
