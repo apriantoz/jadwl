@@ -426,6 +426,8 @@ const JadwalTable: React.FC = () => {
         mkOptions={mkOptions}
         ruangOptions={ruangOptions}
         semesterOptions={semesterOptions}
+        activeSemesterId={activeSemesterId}
+        activeSemesterName={activeSemesterName}
         onChange={setFormData}
         onSubmit={submit}
         onClose={() => setShowModal(false)}

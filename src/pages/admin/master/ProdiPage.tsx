@@ -142,7 +142,7 @@ export const ProdiPage: React.FC = () => {
             type="button"
             onClick={fetchData}
             disabled={loading}
-            className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5 text-sm font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
+            className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5  font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
             title="Refresh data"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
@@ -151,7 +151,7 @@ export const ProdiPage: React.FC = () => {
           <button
             type="button"
             onClick={handleOpenAdd}
-            className="btn btn-sm btn-primary h-10 gap-2 px-4 text-sm font-semibold text-white shadow-sm shadow-primary/20"
+            className="btn btn-sm btn-primary h-10 gap-2 px-4  font-semibold text-white shadow-sm shadow-primary/20"
           >
             <Plus className="h-4 w-4" />
             Tambah Prodi
@@ -162,7 +162,7 @@ export const ProdiPage: React.FC = () => {
       {error && (
         <div
           role="alert"
-          className="alert alert-error mb-5 text-xs font-medium py-3"
+          className="alert alert-error mb-5 text-sm font-medium py-3"
         >
           <AlertTriangle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
@@ -182,7 +182,7 @@ export const ProdiPage: React.FC = () => {
         <div className="card-body p-4 sm:p-5 border-b border-base-200 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="card-title text-sm font-bold text-base-content">
+              <h2 className="card-title  font-bold text-base-content">
                 Data Program Studi
               </h2>
               <span className="badge badge-ghost badge-sm font-semibold">
@@ -190,7 +190,7 @@ export const ProdiPage: React.FC = () => {
                 {search ? ` / ${prodiList.length}` : ""}
               </span>
             </div>
-            <p className="mt-0.5 text-xs text-base-content/60">
+            <p className="mt-0.5 text-sm text-base-content/60">
               Daftar program studi yang tersedia.
             </p>
           </div>
@@ -203,7 +203,7 @@ export const ProdiPage: React.FC = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Cari program studi..."
-                className="grow border-0 bg-transparent focus:outline-none text-xs"
+                className="grow border-0 bg-transparent focus:outline-none text-sm"
               />
             </label>
           </div>
@@ -213,7 +213,7 @@ export const ProdiPage: React.FC = () => {
           {loading ? (
             <div className="flex min-h-[320px] flex-col items-center justify-center">
               <span className="loading loading-spinner loading-md text-primary"></span>
-              <p className="mt-3 text-sm font-semibold text-base-content/70">
+              <p className="mt-3  font-semibold text-base-content/70">
                 Memuat data program studi...
               </p>
             </div>
@@ -227,7 +227,7 @@ export const ProdiPage: React.FC = () => {
                   ? "Data tidak ditemukan"
                   : "Belum ada data program studi"}
               </p>
-              <p className="mt-1 max-w-sm text-xs leading-5 text-base-content/60">
+              <p className="mt-1 max-w-sm text-sm leading-5 text-base-content/60">
                 {search
                   ? `Tidak ada data yang cocok dengan "${search}".`
                   : "Tambahkan program studi pertama Anda untuk memulai."}
@@ -238,9 +238,9 @@ export const ProdiPage: React.FC = () => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th className="text-xs">Kode</th>
-                    <th className="text-xs">Program Studi</th>
-                    <th className="text-xs text-right">Aksi</th>
+                    <th className="text-sm">Kode</th>
+                    <th className="text-sm">Program Studi</th>
+                    <th className="text-sm text-right">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-base-200">
@@ -257,10 +257,10 @@ export const ProdiPage: React.FC = () => {
                             <Building2 className="h-4 w-4" />
                           </div>
                           <div>
-                            <p className="text-sm font-semibold text-base-content">
+                            <p className=" font-semibold text-base-content">
                               {p.nama_prodi}
                             </p>
-                            <p className="text-[10px] text-base-content/50">
+                            <p className="text-xs text-base-content/50">
                               Program studi
                             </p>
                           </div>
@@ -295,7 +295,7 @@ export const ProdiPage: React.FC = () => {
         </div>
 
         {!loading && filtered.length > 0 && (
-          <div className="border-t border-base-200 bg-base-200/40 px-5 py-3 text-xs text-base-content/60">
+          <div className="border-t border-base-200 bg-base-200/40 px-5 py-3 text-sm text-base-content/60">
             Menampilkan{" "}
             <span className="font-semibold text-base-content">
               {filtered.length}
@@ -338,7 +338,7 @@ export const ProdiPage: React.FC = () => {
               <div className="space-y-4 px-6 py-5 max-h-[70vh] overflow-y-auto">
                 <div className="form-control">
                   <label className="label pt-0 pb-1.5">
-                    <span className="label-text text-xs font-semibold text-base-content/80">
+                    <span className="label-text text-sm font-semibold text-base-content/80">
                       Kode Program Studi
                     </span>
                   </label>
@@ -350,13 +350,13 @@ export const ProdiPage: React.FC = () => {
                     onChange={(e) =>
                       setForm({ ...form, kode_prodi: e.target.value })
                     }
-                    className="input input-bordered input-sm w-full text-xs uppercase"
+                    className="input input-bordered input-sm w-full text-sm uppercase"
                   />
                 </div>
 
                 <div className="form-control">
                   <label className="label pt-0 pb-1.5">
-                    <span className="label-text text-xs font-semibold text-base-content/80">
+                    <span className="label-text text-sm font-semibold text-base-content/80">
                       Nama Program Studi
                     </span>
                   </label>
@@ -368,7 +368,7 @@ export const ProdiPage: React.FC = () => {
                     onChange={(e) =>
                       setForm({ ...form, nama_prodi: e.target.value })
                     }
-                    className="input input-bordered input-sm w-full text-xs"
+                    className="input input-bordered input-sm w-full text-sm"
                   />
                 </div>
               </div>

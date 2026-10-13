@@ -181,7 +181,7 @@ export const MataKuliahPage: React.FC = () => {
             type="button"
             onClick={fetchData}
             disabled={loading}
-            className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5 text-sm font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
+            className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5  font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
             title="Refresh data"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
@@ -190,7 +190,7 @@ export const MataKuliahPage: React.FC = () => {
           <button
             type="button"
             onClick={handleOpenAdd}
-            className="btn btn-sm btn-primary h-10 gap-2 px-4 text-sm font-semibold text-white shadow-sm shadow-primary/20"
+            className="btn btn-sm btn-primary h-10 gap-2 px-4  font-semibold text-white shadow-sm shadow-primary/20"
           >
             <Plus className="h-4 w-4" />
             Tambah Mata Kuliah
@@ -201,7 +201,7 @@ export const MataKuliahPage: React.FC = () => {
       {error && (
         <div
           role="alert"
-          className="alert alert-error mb-5 text-xs font-medium py-3"
+          className="alert alert-error mb-5 text-sm font-medium py-3"
         >
           <AlertTriangle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
@@ -221,7 +221,7 @@ export const MataKuliahPage: React.FC = () => {
         <div className="card-body p-4 sm:p-5 border-b border-base-200 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="card-title text-sm font-bold text-base-content">
+              <h2 className="card-title  font-bold text-base-content">
                 Data Mata Kuliah
               </h2>
               <span className="badge badge-ghost badge-sm font-semibold">
@@ -229,7 +229,7 @@ export const MataKuliahPage: React.FC = () => {
                 {search ? ` / ${mkList.length}` : ""}
               </span>
             </div>
-            <p className="mt-0.5 text-xs text-base-content/60">
+            <p className="mt-0.5 text-sm text-base-content/60">
               Daftar mata kuliah beserta semester dan program studi.
             </p>
           </div>
@@ -242,7 +242,7 @@ export const MataKuliahPage: React.FC = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Cari mata kuliah..."
-                className="grow border-0 bg-transparent focus:outline-none text-xs"
+                className="grow border-0 bg-transparent focus:outline-none text-sm"
               />
             </label>
           </div>
@@ -252,7 +252,7 @@ export const MataKuliahPage: React.FC = () => {
           {loading ? (
             <div className="flex min-h-[320px] flex-col items-center justify-center">
               <span className="loading loading-spinner loading-md text-primary"></span>
-              <p className="mt-3 text-sm font-semibold text-base-content/70">
+              <p className="mt-3  font-semibold text-base-content/70">
                 Memuat data mata kuliah...
               </p>
             </div>
@@ -264,7 +264,7 @@ export const MataKuliahPage: React.FC = () => {
               <p className="mt-4 font-semibold text-base-content">
                 {search ? "Data tidak ditemukan" : "Belum ada data mata kuliah"}
               </p>
-              <p className="mt-1 max-w-sm text-xs leading-5 text-base-content/60">
+              <p className="mt-1 max-w-sm text-sm leading-5 text-base-content/60">
                 {search
                   ? `Tidak ada data yang cocok dengan "${search}".`
                   : "Tambahkan mata kuliah pertama Anda untuk memulai."}
@@ -275,12 +275,12 @@ export const MataKuliahPage: React.FC = () => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th className="text-xs">Kode MK</th>
-                    <th className="text-xs">Mata Kuliah</th>
-                    <th className="text-xs">SKS</th>
-                    <th className="text-xs">Semester</th>
-                    <th className="text-xs">Program Studi</th>
-                    <th className="text-xs text-right">Aksi</th>
+                    <th className="text-sm">Kode MK</th>
+                    <th className="text-sm">Mata Kuliah</th>
+                    <th className="text-sm">SKS</th>
+                    <th className="text-sm">Semester</th>
+                    <th className="text-sm">Program Studi</th>
+                    <th className="text-sm text-right">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-base-200">
@@ -297,17 +297,17 @@ export const MataKuliahPage: React.FC = () => {
                             <BookOpen className="h-4 w-4" />
                           </div>
                           <div className="min-w-0">
-                            <p className="text-sm font-semibold text-base-content">
+                            <p className=" font-semibold text-base-content">
                               {m.nama_mk}
                             </p>
-                            <p className="text-[10px] text-base-content/50">
-                              Mata kuliah
+                            <p className="text-xs text-base-content/50">
+                              {m.prodi?.nama_prodi}
                             </p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <span className="text-xs font-medium text-base-content/80">
+                        <span className="text-sm font-medium text-base-content/80">
                           {m.sks} SKS
                         </span>
                       </td>
@@ -317,7 +317,7 @@ export const MataKuliahPage: React.FC = () => {
                         </span>
                       </td>
                       <td>
-                        <span className="text-xs text-base-content/70">
+                        <span className="text-sm text-base-content/70">
                           {m.prodi?.nama_prodi || "-"}
                         </span>
                       </td>
@@ -350,7 +350,7 @@ export const MataKuliahPage: React.FC = () => {
         </div>
 
         {!loading && filtered.length > 0 && (
-          <div className="border-t border-base-200 bg-base-200/40 px-5 py-3 text-xs text-base-content/60">
+          <div className="border-t border-base-200 bg-base-200/40 px-5 py-3 text-sm text-base-content/60">
             Menampilkan{" "}
             <span className="font-semibold text-base-content">
               {filtered.length}
@@ -373,7 +373,7 @@ export const MataKuliahPage: React.FC = () => {
           <div className="modal-box max-w-lg bg-base-100 p-0 shadow-2xl border border-base-200">
             <div className="flex items-center justify-between border-b border-base-200 px-6 py-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                <p className="text-xs font-bold uppercase tracking-wider text-primary">
                   {isEditing ? "Perbarui Data" : "Data Baru"}
                 </p>
                 <h2 className="text-base font-bold text-base-content">
@@ -394,7 +394,7 @@ export const MataKuliahPage: React.FC = () => {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   <div className="form-control">
                     <label className="label pt-0 pb-1.5">
-                      <span className="label-text text-xs font-semibold text-base-content/80">
+                      <span className="label-text text-sm font-semibold text-base-content/80">
                         Kode MK
                       </span>
                     </label>
@@ -405,13 +405,13 @@ export const MataKuliahPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, kode_mk: e.target.value })
                       }
-                      className="input input-bordered input-sm w-full text-xs uppercase"
+                      className="input input-bordered input-sm w-full text-sm uppercase"
                     />
                   </div>
 
                   <div className="form-control sm:col-span-2">
                     <label className="label pt-0 pb-1.5">
-                      <span className="label-text text-xs font-semibold text-base-content/80">
+                      <span className="label-text text-sm font-semibold text-base-content/80">
                         Nama Mata Kuliah
                       </span>
                     </label>
@@ -423,7 +423,7 @@ export const MataKuliahPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, nama_mk: e.target.value })
                       }
-                      className="input input-bordered input-sm w-full text-xs"
+                      className="input input-bordered input-sm w-full text-sm"
                     />
                   </div>
                 </div>
@@ -431,7 +431,7 @@ export const MataKuliahPage: React.FC = () => {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   <div className="form-control">
                     <label className="label pt-0 pb-1.5">
-                      <span className="label-text text-xs font-semibold text-base-content/80">
+                      <span className="label-text text-sm font-semibold text-base-content/80">
                         Jumlah SKS
                       </span>
                     </label>
@@ -444,13 +444,13 @@ export const MataKuliahPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, sks: e.target.value })
                       }
-                      className="input input-bordered input-sm w-full text-xs"
+                      className="input input-bordered input-sm w-full text-sm"
                     />
                   </div>
 
                   <div className="form-control">
                     <label className="label pt-0 pb-1.5">
-                      <span className="label-text text-xs font-semibold text-base-content/80">
+                      <span className="label-text text-sm font-semibold text-base-content/80">
                         Semester
                       </span>
                     </label>
@@ -460,7 +460,7 @@ export const MataKuliahPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, smt_id: e.target.value })
                       }
-                      className="select select-bordered select-sm w-full text-xs"
+                      className="select select-bordered select-sm w-full text-sm"
                     >
                       <option value="" disabled>
                         -- Pilih --
@@ -475,7 +475,7 @@ export const MataKuliahPage: React.FC = () => {
 
                   <div className="form-control">
                     <label className="label pt-0 pb-1.5">
-                      <span className="label-text text-xs font-semibold text-base-content/80">
+                      <span className="label-text text-sm font-semibold text-base-content/80">
                         Program Studi
                       </span>
                     </label>
@@ -485,7 +485,7 @@ export const MataKuliahPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, prodi_id: e.target.value })
                       }
-                      className="select select-bordered select-sm w-full text-xs"
+                      className="select select-bordered select-sm w-full text-sm"
                     >
                       <option value="" disabled>
                         -- Pilih --

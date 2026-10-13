@@ -1,10 +1,9 @@
 import React from "react";
-import { CalendarDays, Clock, Loader2, MapPin, Plus } from "lucide-react";
+import { CalendarDays, Clock, MapPin, Plus } from "lucide-react";
 import { DAYS } from "../types/constants";
 import { getItemId } from "../types/utils";
-import type { JadwalItem, ViewMode } from "../types/types";
+import type { JadwalItem, ViewMode, DropdownOption } from "../types/types";
 import { JadwalScheduleRow } from "./JadwalScheduleRow";
-import type { DropdownOption } from "../types/types";
 
 interface Props {
   loading: boolean;
@@ -55,44 +54,50 @@ export const JadwalListView: React.FC<Props> = ({
   };
 
   return (
-    <div className="card bg-base-100 border border-base-200 shadow-sm overflow-hidden">
-      {/* Header Card: responsif flex-col di HP, flex-row di layar md */}
-      <div className="card-body px-4 sm:px-5 py-4 border-b border-base-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+    <div className="card overflow-hidden border border-base-200 bg-base-100 shadow-sm">
+      {/* Header */}
+      <div className="card-body flex flex-col justify-between gap-3 border-b border-base-200 px-4 py-4 sm:flex-row sm:items-center sm:px-5">
         <div>
-          <h2 className="card-title text-sm font-bold text-base-content">
+          <h2 className="card-title text-lg font-bold text-base-content">
             {viewMode === "jadwal" ? "Jadwal Per Hari" : "Pemakaian Ruangan"}
           </h2>
-          <p className="mt-0.5 text-xs text-base-content/60">
+
+          <p className="mt-1 text-sm leading-relaxed text-base-content/60">
             {viewMode === "jadwal"
               ? "Urutan waktu otomatis dari pagi hingga sore."
               : "Lihat kapan setiap ruangan digunakan."}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-[11px] font-medium text-base-content/60 badge badge-ghost self-start sm:self-auto">
-          <Clock className="h-3.5 w-3.5" />
-          {filtered.length} jadwal · {roomsInUse} ruangan
+        <div className="badge badge-ghost flex items-center gap-2 self-start py-3 text-sm font-medium text-base-content/70 sm:self-auto">
+          <Clock className="h-4 w-4 shrink-0" />
+          <span>
+            {filtered.length} jadwal · {roomsInUse} ruangan
+          </span>
         </div>
       </div>
 
       {/* Konten Utama */}
       <div className="card-body p-0">
         {loading ? (
-          <div className="flex min-h-[360px] flex-col items-center justify-center">
-            <span className="loading loading-spinner loading-md text-primary"></span>
-            <p className="mt-3 text-sm font-semibold text-base-content/70">
+          <div className="flex min-h-[360px] flex-col items-center justify-center px-4">
+            <span className="loading loading-spinner loading-lg text-primary" />
+
+            <p className="mt-3 text-sm font-medium text-base-content/70">
               Memuat jadwal...
             </p>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="flex min-h-[340px] flex-col items-center justify-center px-6 text-center py-12">
+          <div className="flex min-h-[340px] flex-col items-center justify-center px-6 py-12 text-center">
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-base-200 text-base-content/40">
               <CalendarDays className="h-7 w-7" />
             </div>
-            <p className="mt-4 font-semibold text-base-content">
+
+            <p className="mt-4 text-base font-semibold text-base-content">
               Tidak ada jadwal ditemukan
             </p>
-            <p className="mt-1 max-w-sm text-xs leading-5 text-base-content/60">
+
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-base-content/60">
               Coba ubah pencarian atau filter. Jika belum ada jadwal, tambahkan
               jadwal baru.
             </p>
@@ -103,7 +108,7 @@ export const JadwalListView: React.FC<Props> = ({
                 <button
                   type="button"
                   onClick={onAdd}
-                  className="btn btn-primary btn-sm mt-4 gap-2 text-xs"
+                  className="btn btn-primary btn-sm mt-4 gap-2"
                 >
                   <Plus className="h-4 w-4" />
                   Tambah Jadwal
@@ -117,14 +122,17 @@ export const JadwalListView: React.FC<Props> = ({
                 key={group.day}
                 className="border-b border-base-200 last:border-b-0"
               >
-                <div className="sticky top-0 z-10 flex items-center justify-between border-b border-base-200 bg-base-200/80 px-4 sm:px-5 py-2.5 backdrop-blur">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-primary" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-base-content/80">
+                {/* Header Hari */}
+                <div className="sticky top-0 z-10 flex items-center justify-between border-b border-base-200 bg-base-200/90 px-4 py-3 backdrop-blur sm:px-5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-primary" />
+
+                    <span className="text-sm font-bold uppercase tracking-wide text-base-content/80">
                       {group.day}
                     </span>
                   </div>
-                  <span className="badge badge-sm badge-neutral font-semibold text-[10px]">
+
+                  <span className="badge badge-neutral badge-sm font-semibold">
                     {group.items.length} jadwal
                   </span>
                 </div>
@@ -146,24 +154,28 @@ export const JadwalListView: React.FC<Props> = ({
                 key={room.id}
                 className="border-b border-base-200 last:border-b-0"
               >
-                <div className="flex items-center justify-between bg-base-200/50 px-4 sm:px-5 py-3">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <MapPin className="h-4 w-4" />
+                {/* Header Ruangan */}
+                <div className="flex items-center justify-between gap-3 bg-base-200/50 px-4 py-3.5 sm:px-5">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <MapPin className="h-5 w-5" />
                     </span>
-                    <div>
-                      <p className="text-sm font-bold text-base-content">
+
+                    <div className="min-w-0">
+                      <p className="truncate text-base font-bold text-base-content">
                         {room.nama}
                       </p>
-                      <p className="text-[10px] text-base-content/60">
+
+                      <p className="mt-0.5 text-sm text-base-content/60">
                         {items.length} jadwal penggunaan
                       </p>
                     </div>
                   </div>
+
                   <button
                     type="button"
                     onClick={() => onFocusRoom(String(room.id))}
-                    className="btn btn-ghost btn-xs border border-base-300 font-semibold text-base-content/70 hover:text-primary"
+                    className="btn btn-ghost btn-sm shrink-0 border border-base-300 font-semibold text-base-content/70 hover:text-primary"
                   >
                     Fokus ruang
                   </button>
@@ -171,13 +183,15 @@ export const JadwalListView: React.FC<Props> = ({
 
                 {DAYS.map((day) => {
                   const dayItems = items.filter((item) => item.hari === day);
+
                   if (!dayItems.length) return null;
 
                   return (
                     <div key={day}>
-                      <div className="px-4 sm:px-5 pt-3 text-[10px] font-bold uppercase tracking-wider text-base-content/50">
+                      <div className="px-4 pb-1 pt-4 text-xs font-bold uppercase tracking-wide text-base-content/60 sm:px-5">
                         {day}
                       </div>
+
                       {dayItems.map((item, index) => (
                         <JadwalScheduleRow
                           key={getItemId(item) ?? `${room.id}-${day}-${index}`}

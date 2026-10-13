@@ -14,59 +14,84 @@ export const JadwalStats: React.FC<Props> = ({
   totalConflict,
 }) => {
   return (
-    <div className="mb-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
       {/* Semester Aktif */}
-      <div className="card bg-base-100 border border-base-200 shadow-sm">
-        <div className="card-body p-3.5">
-          <p className="text-[11px] font-medium text-base-content/60">
-            Semester aktif
+      <div className="card border border-base-200 bg-base-100 shadow-sm">
+        <div className="card-body min-w-0 gap-2 p-4 sm:p-5">
+          <p className="text-sm font-medium leading-snug text-base-content/60">
+            Semester Aktif
           </p>
-          <p className="mt-1 truncate text-sm font-bold text-base-content">
-            {activeSemesterName}
+
+          <p
+            className="truncate text-base font-bold leading-snug text-base-content sm:text-lg"
+            title={activeSemesterName}
+          >
+            {activeSemesterName || "Belum ditentukan"}
           </p>
         </div>
       </div>
 
       {/* Jadwal Tampil */}
-      <div className="card bg-base-100 border border-base-200 shadow-sm">
-        <div className="card-body p-3.5">
-          <p className="text-[11px] font-medium text-base-content/60">
-            Jadwal tampil
+      <div className="card border border-base-200 bg-base-100 shadow-sm">
+        <div className="card-body gap-2 p-4 sm:p-5">
+          <p className="text-sm font-medium leading-snug text-base-content/60">
+            Jadwal Tampil
           </p>
-          <p className="mt-1 text-xl font-bold text-base-content">
+
+          <p className="text-2xl font-bold tabular-nums leading-tight text-base-content sm:text-3xl">
             {filteredCount}
+          </p>
+
+          <p className="text-xs leading-relaxed text-base-content/50">
+            Sesuai filter aktif
           </p>
         </div>
       </div>
 
       {/* Ruangan Terpakai */}
-      <div className="card bg-base-100 border border-base-200 shadow-sm">
-        <div className="card-body p-3.5">
-          <p className="text-[11px] font-medium text-base-content/60">
-            Ruangan terpakai
+      <div className="card border border-base-200 bg-base-100 shadow-sm">
+        <div className="card-body gap-2 p-4 sm:p-5">
+          <p className="text-sm font-medium leading-snug text-base-content/60">
+            Ruangan Terpakai
           </p>
-          <p className="mt-1 text-xl font-bold text-base-content">
+
+          <p className="text-2xl font-bold tabular-nums leading-tight text-base-content sm:text-3xl">
             {roomsInUse}
+          </p>
+
+          <p className="text-xs leading-relaxed text-base-content/50">
+            Ruangan dengan jadwal
           </p>
         </div>
       </div>
 
       {/* Bentrok */}
       <div
-        className={`card bg-base-100 border shadow-sm ${
-          totalConflict ? "border-error/40 bg-error/5" : "border-base-200"
+        className={`card border shadow-sm ${
+          totalConflict > 0
+            ? "border-error/40 bg-error/5"
+            : "border-base-200 bg-base-100"
         }`}
       >
-        <div className="card-body p-3.5">
-          <p className="text-[11px] font-medium text-base-content/60">
-            Bentrok
+        <div className="card-body gap-2 p-4 sm:p-5">
+          <p className="text-sm font-medium leading-snug text-base-content/60">
+            Jadwal Bentrok
           </p>
+
           <p
-            className={`mt-1 text-xl font-bold ${
-              totalConflict ? "text-error" : "text-base-content"
+            className={`text-2xl font-bold tabular-nums leading-tight sm:text-3xl ${
+              totalConflict > 0 ? "text-error" : "text-base-content"
             }`}
           >
             {totalConflict}
+          </p>
+
+          <p
+            className={`text-xs leading-relaxed ${
+              totalConflict > 0 ? "text-error/80" : "text-base-content/50"
+            }`}
+          >
+            {totalConflict > 0 ? "Perlu diperiksa" : "Tidak ada bentrok"}
           </p>
         </div>
       </div>

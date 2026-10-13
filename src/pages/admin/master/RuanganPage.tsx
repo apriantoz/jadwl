@@ -164,7 +164,7 @@ export const RuanganPage: React.FC = () => {
             type="button"
             onClick={fetchData}
             disabled={loading}
-            className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5 text-sm font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
+            className="btn btn-sm h-10 border border-base-300 bg-base-100 px-3.5  font-semibold text-base-content/70 shadow-sm hover:bg-base-200 disabled:opacity-60"
             title="Refresh data"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
@@ -173,7 +173,7 @@ export const RuanganPage: React.FC = () => {
           <button
             type="button"
             onClick={handleOpenAdd}
-            className="btn btn-sm btn-primary h-10 gap-2 px-4 text-sm font-semibold text-white shadow-sm shadow-primary/20"
+            className="btn btn-sm btn-primary h-10 gap-2 px-4  font-semibold text-white shadow-sm shadow-primary/20"
           >
             <Plus className="h-4 w-4" />
             Tambah Ruangan
@@ -184,7 +184,7 @@ export const RuanganPage: React.FC = () => {
       {error && (
         <div
           role="alert"
-          className="alert alert-error mb-5 text-xs font-medium py-3"
+          className="alert alert-error mb-5 text-sm font-medium py-3"
         >
           <AlertTriangle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
@@ -204,7 +204,7 @@ export const RuanganPage: React.FC = () => {
         <div className="card-body p-4 sm:p-5 border-b border-base-200 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="card-title text-sm font-bold text-base-content">
+              <h2 className="card-title  font-bold text-base-content">
                 Data Ruangan
               </h2>
               <span className="badge badge-ghost badge-sm font-semibold">
@@ -212,7 +212,7 @@ export const RuanganPage: React.FC = () => {
                 {search ? ` / ${ruangList.length}` : ""}
               </span>
             </div>
-            <p className="mt-0.5 text-xs text-base-content/60">
+            <p className="mt-0.5 text-sm text-base-content/60">
               Daftar ruangan dan kapasitas yang tersedia.
             </p>
           </div>
@@ -225,7 +225,7 @@ export const RuanganPage: React.FC = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Cari ruangan..."
-                className="grow border-0 bg-transparent focus:outline-none text-xs"
+                className="grow border-0 bg-transparent focus:outline-none text-sm"
               />
             </label>
           </div>
@@ -235,7 +235,7 @@ export const RuanganPage: React.FC = () => {
           {loading ? (
             <div className="flex min-h-[320px] flex-col items-center justify-center">
               <span className="loading loading-spinner loading-md text-primary"></span>
-              <p className="mt-3 text-sm font-semibold text-base-content/70">
+              <p className="mt-3  font-semibold text-base-content/70">
                 Memuat data ruangan...
               </p>
             </div>
@@ -247,7 +247,7 @@ export const RuanganPage: React.FC = () => {
               <p className="mt-4 font-semibold text-base-content">
                 {search ? "Data tidak ditemukan" : "Belum ada data ruangan"}
               </p>
-              <p className="mt-1 max-w-sm text-xs leading-5 text-base-content/60">
+              <p className="mt-1 max-w-sm text-sm leading-5 text-base-content/60">
                 {search
                   ? `Tidak ada data yang cocok dengan "${search}".`
                   : "Tambahkan ruangan pertama Anda untuk memulai."}
@@ -258,10 +258,10 @@ export const RuanganPage: React.FC = () => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th className="text-xs">Nama Ruangan</th>
-                    <th className="text-xs">Tipe</th>
-                    <th className="text-xs">Kapasitas</th>
-                    <th className="text-xs text-right">Aksi</th>
+                    <th className="text-sm">Nama Ruangan</th>
+                    <th className="text-sm">Tipe</th>
+                    <th className="text-sm">Kapasitas</th>
+                    <th className="text-sm text-right">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-base-200">
@@ -273,10 +273,10 @@ export const RuanganPage: React.FC = () => {
                             <MapPin className="h-4 w-4" />
                           </div>
                           <div>
-                            <p className="text-sm font-semibold text-base-content">
+                            <p className=" font-semibold text-base-content">
                               {r.nama_ruang}
                             </p>
-                            <p className="text-[10px] text-base-content/50">
+                            <p className="text-xs text-base-content/50">
                               ID #{r.id}
                             </p>
                           </div>
@@ -288,7 +288,7 @@ export const RuanganPage: React.FC = () => {
                         </span>
                       </td>
                       <td>
-                        <span className="inline-flex items-center gap-1.5 text-xs text-base-content/70">
+                        <span className="inline-flex items-center gap-1.5 text-sm text-base-content/70">
                           <Users className="h-3.5 w-3.5 text-base-content/40" />
                           {r.kapasitas ? `${r.kapasitas} kursi` : "-"}
                         </span>
@@ -322,7 +322,7 @@ export const RuanganPage: React.FC = () => {
         </div>
 
         {!loading && filtered.length > 0 && (
-          <div className="border-t border-base-200 bg-base-200/40 px-5 py-3 text-xs text-base-content/60">
+          <div className="border-t border-base-200 bg-base-200/40 px-5 py-3 text-sm text-base-content/60">
             Menampilkan{" "}
             <span className="font-semibold text-base-content">
               {filtered.length}
@@ -365,7 +365,7 @@ export const RuanganPage: React.FC = () => {
               <div className="space-y-4 px-6 py-5 max-h-[70vh] overflow-y-auto">
                 <div className="form-control">
                   <label className="label pt-0 pb-1.5">
-                    <span className="label-text text-xs font-semibold text-base-content/80">
+                    <span className="label-text text-sm font-semibold text-base-content/80">
                       Nama Ruangan
                     </span>
                   </label>
@@ -377,14 +377,14 @@ export const RuanganPage: React.FC = () => {
                     onChange={(e) =>
                       setForm({ ...form, nama_ruang: e.target.value })
                     }
-                    className="input input-bordered input-sm w-full text-xs"
+                    className="input input-bordered input-sm w-full text-sm"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="form-control">
                     <label className="label pt-0 pb-1.5">
-                      <span className="label-text text-xs font-semibold text-base-content/80">
+                      <span className="label-text text-sm font-semibold text-base-content/80">
                         Tipe Ruang
                       </span>
                     </label>
@@ -394,7 +394,7 @@ export const RuanganPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, tipe_ruang_id: e.target.value })
                       }
-                      className="select select-bordered select-sm w-full text-xs"
+                      className="select select-bordered select-sm w-full text-sm"
                     >
                       <option value="" disabled>
                         -- Pilih Tipe --
@@ -409,7 +409,7 @@ export const RuanganPage: React.FC = () => {
 
                   <div className="form-control">
                     <label className="label pt-0 pb-1.5">
-                      <span className="label-text text-xs font-semibold text-base-content/80">
+                      <span className="label-text text-sm font-semibold text-base-content/80">
                         Kapasitas Kursi
                       </span>
                     </label>
@@ -421,7 +421,7 @@ export const RuanganPage: React.FC = () => {
                       onChange={(e) =>
                         setForm({ ...form, kapasitas: e.target.value })
                       }
-                      className="input input-bordered input-sm w-full text-xs"
+                      className="input input-bordered input-sm w-full text-sm"
                     />
                   </div>
                 </div>

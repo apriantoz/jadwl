@@ -220,7 +220,6 @@ export default function Dashboard() {
 
       const isBusy = jadwalList.some((item) => {
         const sameDay = normalizeText(item.hari) === normalizeText(roomDay);
-
         const sameRoom = Number(item.ruang_id) === Number(room.id);
 
         const scheduleStart = formatTime(item.jam_mulai);
@@ -310,7 +309,7 @@ export default function Dashboard() {
           <Info size={18} />
           <div>
             <p className="font-semibold">Gagal memuat data dashboard</p>
-            <p className="text-xs">{error}</p>
+            <p className="text-sm">{error}</p>
           </div>
 
           <button
@@ -329,7 +328,7 @@ export default function Dashboard() {
           <div className="flex items-start gap-3">
             <Info className="mt-0.5 shrink-0 text-warning" size={22} />
             <div>
-              <h2 className="font-bold text-base-content">
+              <h2 className="text-lg font-bold text-base-content">
                 Belum ada semester aktif
               </h2>
               <p className="mt-1 text-sm text-base-content/70">
@@ -368,7 +367,7 @@ export default function Dashboard() {
             </div>
 
             <div className="rounded-xl border border-base-200 bg-base-100 px-5 py-3">
-              <p className="text-xs text-base-content/60">Waktu Bali (WITA)</p>
+              <p className="text-sm text-base-content/60">Waktu Bali (WITA)</p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-base-content">
                 {time}
               </p>
@@ -380,7 +379,7 @@ export default function Dashboard() {
               {todaySchedule.length} jadwal hari ini
             </span>
 
-            <span className="text-xs text-base-content/60">
+            <span className="text-sm text-base-content/60">
               {activeSemesterName}
             </span>
           </div>
@@ -394,7 +393,6 @@ export default function Dashboard() {
                 const end = formatTime(item.jam_selesai);
 
                 const ongoing = start <= time && time < end;
-
                 const finished = end <= time;
 
                 const conflict =
@@ -420,7 +418,7 @@ export default function Dashboard() {
                       </div>
 
                       <div className="min-w-0">
-                        <p className="font-semibold text-base-content">
+                        <p className="text-base font-semibold text-base-content">
                           {getMkName(item)}
                         </p>
 
@@ -430,14 +428,14 @@ export default function Dashboard() {
                           </p>
                         )}
 
-                        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-base-content/60">
+                        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-base-content/60">
                           <span className="flex items-center gap-1">
-                            <Clock size={13} />
+                            <Clock size={14} />
                             {start}–{end}
                           </span>
 
                           <span className="flex items-center gap-1">
-                            <MapPin size={13} />
+                            <MapPin size={14} />
                             {getRuangName(item)}
                           </span>
                         </div>
@@ -479,7 +477,7 @@ export default function Dashboard() {
                 size={28}
                 className="mx-auto text-base-content/30"
               />
-              <p className="mt-3 font-semibold text-base-content">
+              <p className="mt-3 text-base font-semibold text-base-content">
                 Tidak ada jadwal kuliah hari ini
               </p>
               <p className="mt-1 text-sm text-base-content/60">
@@ -507,7 +505,7 @@ export default function Dashboard() {
                 <p className="mt-1 text-2xl font-bold tabular-nums text-base-content">
                   {value}
                 </p>
-                <p className="mt-1 text-xs text-base-content/50">
+                <p className="mt-1 text-sm text-base-content/50">
                   {description}
                 </p>
               </div>
@@ -532,7 +530,7 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <label className="form-control">
-              <span className="label mb-1 text-xs font-semibold">Hari</span>
+              <span className="label mb-1 text-sm font-semibold">Hari</span>
               <select
                 className="select select-bordered w-full"
                 value={roomDay}
@@ -547,7 +545,7 @@ export default function Dashboard() {
             </label>
 
             <label className="form-control">
-              <span className="label mb-1 text-xs font-semibold">
+              <span className="label mb-1 text-sm font-semibold">
                 Jam Mulai
               </span>
               <input
@@ -559,7 +557,7 @@ export default function Dashboard() {
             </label>
 
             <label className="form-control">
-              <span className="label mb-1 text-xs font-semibold">
+              <span className="label mb-1 text-sm font-semibold">
                 Jam Selesai
               </span>
               <input
@@ -571,7 +569,7 @@ export default function Dashboard() {
             </label>
 
             <label className="form-control">
-              <span className="label mb-1 text-xs font-semibold">
+              <span className="label mb-1 text-sm font-semibold">
                 Nama Ruangan
               </span>
               <input
@@ -619,7 +617,7 @@ export default function Dashboard() {
                         <p className="truncate text-sm font-semibold text-base-content">
                           {room.nama}
                         </p>
-                        <p className="mt-0.5 text-xs text-success">Tersedia</p>
+                        <p className="mt-0.5 text-sm text-success">Tersedia</p>
                       </div>
                     </div>
                   ))}
@@ -630,10 +628,10 @@ export default function Dashboard() {
                     size={26}
                     className="mx-auto text-base-content/30"
                   />
-                  <p className="mt-2 text-sm font-semibold text-base-content">
+                  <p className="mt-2 text-base font-semibold text-base-content">
                     Tidak ada ruangan yang cocok
                   </p>
-                  <p className="mt-1 text-xs text-base-content/60">
+                  <p className="mt-1 text-sm text-base-content/60">
                     Coba ubah hari, jam, atau kata kunci pencarian.
                   </p>
                 </div>
@@ -653,7 +651,7 @@ export default function Dashboard() {
                 <h2 className="text-lg font-bold text-base-content">
                   Jadwal Berikutnya
                 </h2>
-                <p className="mt-1 text-xs text-base-content/60">
+                <p className="mt-1 text-sm text-base-content/60">
                   Maksimal tiga jadwal hari ini yang belum selesai.
                 </p>
               </div>
@@ -673,16 +671,16 @@ export default function Dashboard() {
                       className="flex items-center justify-between gap-3 rounded-xl bg-base-200/50 p-3"
                     >
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-base-content">
+                        <p className="truncate text-base font-semibold text-base-content">
                           {getMkName(item)}
                         </p>
-                        <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-base-content/60">
+                        <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-base-content/60">
                           <span className="flex items-center gap-1">
-                            <Clock size={12} />
+                            <Clock size={13} />
                             {start}–{end}
                           </span>
                           <span className="flex items-center gap-1">
-                            <MapPin size={12} />
+                            <MapPin size={13} />
                             {getRuangName(item)}
                           </span>
                         </p>
@@ -723,7 +721,7 @@ export default function Dashboard() {
                 <h2 className="text-lg font-bold text-base-content">
                   Peringatan Bentrok
                 </h2>
-                <p className="mt-1 text-xs text-base-content/60">
+                <p className="mt-1 text-sm text-base-content/60">
                   Jadwal yang perlu diperiksa.
                 </p>
               </div>
@@ -746,15 +744,15 @@ export default function Dashboard() {
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
-                          <p className="font-semibold text-base-content">
+                          <p className="text-base font-semibold text-base-content">
                             {getMkName(item)}
                           </p>
-                          <p className="mt-1 text-xs text-base-content/60">
+                          <p className="mt-1 text-sm text-base-content/60">
                             {item.hari} · {formatTime(item.jam_mulai)}–
                             {formatTime(item.jam_selesai)}
                           </p>
-                          <p className="mt-1 flex items-center gap-1 text-xs text-base-content/60">
-                            <MapPin size={12} />
+                          <p className="mt-1 flex items-center gap-1 text-sm text-base-content/60">
+                            <MapPin size={13} />
                             {getRuangName(item)}
                           </p>
                         </div>
@@ -783,7 +781,7 @@ export default function Dashboard() {
                   <p className="text-sm font-semibold text-success">
                     Tidak ada jadwal bentrok
                   </p>
-                  <p className="mt-1 text-xs text-base-content/60">
+                  <p className="mt-1 text-sm text-base-content/60">
                     Jadwal pada semester aktif tidak menunjukkan konflik ruangan
                     dan waktu.
                   </p>
@@ -805,7 +803,7 @@ export default function Dashboard() {
               <h2 className="text-lg font-bold text-base-content">
                 Jadwal per Hari
               </h2>
-              <p className="text-xs text-base-content/60">
+              <p className="text-sm text-base-content/60">
                 Distribusi jadwal pada semester aktif.
               </p>
             </div>
@@ -849,7 +847,7 @@ export default function Dashboard() {
                 <h2 className="text-lg font-bold text-base-content">
                   Penggunaan Ruangan
                 </h2>
-                <p className="text-xs text-base-content/60">
+                <p className="text-sm text-base-content/60">
                   Lima ruangan dengan jumlah jadwal terbanyak.
                 </p>
               </div>
@@ -872,7 +870,7 @@ export default function Dashboard() {
                     <span className="text-sm font-semibold text-base-content">
                       {room.name}
                     </span>
-                    <span className="text-xs text-base-content/60">
+                    <span className="text-sm text-base-content/60">
                       {room.count} jadwal
                     </span>
                   </div>
@@ -915,7 +913,7 @@ export default function Dashboard() {
                 <p className="text-sm font-semibold text-base-content">
                   Kelola Jadwal
                 </p>
-                <p className="text-xs text-base-content/60">
+                <p className="text-sm text-base-content/60">
                   Tambah dan ubah jadwal
                 </p>
               </div>
@@ -935,7 +933,7 @@ export default function Dashboard() {
                 <p className="text-sm font-semibold text-base-content">
                   Master Semester
                 </p>
-                <p className="text-xs text-base-content/60">
+                <p className="text-sm text-base-content/60">
                   Atur periode aktif
                 </p>
               </div>
@@ -955,7 +953,7 @@ export default function Dashboard() {
                 <p className="text-sm font-semibold text-base-content">
                   Master Ruangan
                 </p>
-                <p className="text-xs text-base-content/60">
+                <p className="text-sm text-base-content/60">
                   Lihat data ruangan
                 </p>
               </div>

@@ -27,77 +27,110 @@ export const JadwalToolbar: React.FC<Props> = ({
   onViewModeChange,
 }) => {
   return (
-    <div className="card bg-base-100 border border-base-200 shadow-sm mb-5">
-      <div className="card-body p-4 flex flex-col md:flex-row items-stretch md:items-center gap-3">
-        {/* Input Pencarian */}
-        <div className="relative min-w-0 flex-1">
-          <label className="input w-full flex items-center gap-2">
-            <Search className="h-4 w-4 text-base-content/40 shrink-0" />
+    <div className="card mb-6 border border-base-200 bg-base-100 shadow-sm">
+      <div className="card-body flex flex-col gap-4 p-4 sm:p-5">
+        {/* Pencarian */}
+        <div className="relative w-full min-w-0">
+          <label className="input input-bordered flex h-12 w-full items-center gap-3 rounded-xl">
+            <Search className="h-5 w-5 shrink-0 text-base-content/50" />
+
             <input
+              type="search"
               value={search}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Cari mata kuliah, prodi, kode, ruang, atau catatan..."
-              className="grow border-0 bg-transparent focus:outline-none"
+              aria-label="Cari jadwal"
+              className="grow border-0 bg-transparent text-base text-base-content outline-none placeholder:text-base-content/45 focus:outline-none"
             />
           </label>
         </div>
 
-        {/* Baris Filter & Toggle untuk Layar Kecil */}
-        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2">
+        {/* Filter dan Mode Tampilan */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-center">
           {/* Filter Hari */}
-          <select
-            value={dayFilter}
-            onChange={(e) => onDayFilterChange(e.target.value)}
-            className="select w-full sm:w-40"
-          >
-            <option>Semua Hari</option>
-            {DAYS.map((day) => (
-              <option key={day}>{day}</option>
-            ))}
-          </select>
+          <label className="form-control min-w-0">
+            <span className="mb-1.5 text-sm font-semibold text-base-content/70">
+              Filter Hari
+            </span>
 
-          {/* Filter Ruang */}
-          <select
-            value={roomFilter}
-            onChange={(e) => onRoomFilterChange(e.target.value)}
-            className="select w-full sm:w-40 "
-          >
-            <option>Semua Ruang</option>
-            {ruangOptions.map((room) => (
-              <option key={room.id} value={room.id}>
-                {room.nama}
-              </option>
-            ))}
-          </select>
-        </div>
+            <select
+              value={dayFilter}
+              onChange={(e) => onDayFilterChange(e.target.value)}
+              aria-label="Filter berdasarkan hari"
+              className="select select-bordered w-full text-base"
+            >
+              <option value="Semua Hari">Semua Hari</option>
 
-        {/* Toggle View Mode (Jadwal / Ruang) */}
-        <div className="join w-full sm:w-auto flex justify-center">
-          <button
-            type="button"
-            onClick={() => onViewModeChange("jadwal")}
-            className={`join-item btn btn-sm flex-1 sm:flex-initial ${
-              viewMode === "jadwal"
-                ? "btn-active bg-base-100 text-base-content shadow-sm"
-                : "btn-ghost text-base-content/60"
-            }`}
-          >
-            <CalendarDays className="h-3.5 w-3.5" />
-            Jadwal
-          </button>
+              {DAYS.map((day) => (
+                <option key={day} value={day}>
+                  {day}
+                </option>
+              ))}
+            </select>
+          </label>
 
-          <button
-            type="button"
-            onClick={() => onViewModeChange("ruang")}
-            className={`join-item btn btn-sm flex-1 sm:flex-initial ${
-              viewMode === "ruang"
-                ? "btn-active bg-base-100 text-base-content shadow-sm"
-                : "btn-ghost text-base-content/60"
-            }`}
-          >
-            <MapPin className="h-3.5 w-3.5" />
-            Ruang
-          </button>
+          {/* Filter Ruangan */}
+          <label className="form-control min-w-0">
+            <span className="mb-1.5 text-sm font-semibold text-base-content/70">
+              Filter Ruangan
+            </span>
+
+            <select
+              value={roomFilter}
+              onChange={(e) => onRoomFilterChange(e.target.value)}
+              aria-label="Filter berdasarkan ruangan"
+              className="select select-bordered w-full text-base"
+            >
+              <option value="Semua Ruang">Semua Ruang</option>
+
+              {ruangOptions.map((room) => (
+                <option key={room.id} value={room.id}>
+                  {room.nama}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {/* Mode Tampilan */}
+          <div className="form-control min-w-0">
+            <span className="mb-1.5 text-sm font-semibold text-base-content/70">
+              Tampilan
+            </span>
+
+            <div
+              className="join grid h-12 w-full grid-cols-2 rounded-xl border border-base-300 p-1 lg:w-auto lg:min-w-[190px]"
+              role="group"
+              aria-label="Pilih mode tampilan"
+            >
+              <button
+                type="button"
+                onClick={() => onViewModeChange("jadwal")}
+                aria-pressed={viewMode === "jadwal"}
+                className={`join-item btn font-semibold ${
+                  viewMode === "jadwal"
+                    ? "bg-primary text-primary-content shadow-sm hover:bg-primary"
+                    : "btn-ghost text-base-content/70"
+                }`}
+              >
+                <CalendarDays className="h-4 w-4 shrink-0" />
+                Jadwal
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onViewModeChange("ruang")}
+                aria-pressed={viewMode === "ruang"}
+                className={`join-item btn font-semibold ${
+                  viewMode === "ruang"
+                    ? "bg-primary text-primary-content shadow-sm hover:bg-primary"
+                    : "btn-ghost text-base-content/70"
+                }`}
+              >
+                <MapPin className="h-4 w-4 shrink-0" />
+                Ruang
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
