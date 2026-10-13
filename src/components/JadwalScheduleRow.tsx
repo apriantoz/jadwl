@@ -1,13 +1,16 @@
 import React from "react";
 import {
   AlertTriangle,
+  BookmarkIcon,
   BookOpen,
   CheckCircle2,
   ChevronRight,
   Edit,
   FileText,
   MapPin,
+  MessageCircleWarningIcon,
   Trash2,
+  TriangleAlertIcon,
 } from "lucide-react";
 
 import {
@@ -97,19 +100,21 @@ export const JadwalScheduleRow: React.FC<Props> = ({
         {/* INFORMASI MATA KULIAH */}
         <div className="min-w-0">
           <div className="flex min-w-0 items-center gap-2.5">
-            <span
-              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
-                conflict
-                  ? "bg-error/15 text-error"
-                  : "bg-primary/10 text-primary"
-              }`}
-            >
-              <BookOpen className="h-4 w-4" />
-            </span>
-
             <div className="min-w-0">
-              <p className="truncate text-base font-semibold leading-snug text-base-content">
-                {getMkName(item)}
+              <p className="truncate text-base font-semibold leading-snug text-base-content inline-flex items-center">
+                {getMkName(item)}{" "}
+                {conflict ? (
+                  <button
+                    className="btn btn-error btn-xs btn-ghost ml-1"
+                    onClick={() => onOpenConflict(item)}
+                  >
+                    <TriangleAlertIcon size={16} />
+                  </button>
+                ) : (
+                  <div className="ml-1">
+                    <CheckCircle2 className="h-4 w-4 text-success" />
+                  </div>
+                )}
               </p>
 
               <p className="mt-1 truncate text-sm text-base-content/60">
@@ -122,11 +127,14 @@ export const JadwalScheduleRow: React.FC<Props> = ({
           {/* Detail Jadwal */}
           <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-base-content/70">
             <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-4 w-4 shrink-0 text-base-content/50" />
+              <MapPin size={16} className="text-base-content/50" />
               {getRuangName(item)}
             </span>
 
-            <span>{getSemesterName(item)}</span>
+            <span className="inline-flex items-center gap-1.5">
+              <BookmarkIcon size={16} className="text-base-content/50" />
+              {getSemesterName(item)}
+            </span>
 
             {item.catatan && (
               <span className="inline-flex max-w-full items-center gap-1.5">
@@ -138,58 +146,7 @@ export const JadwalScheduleRow: React.FC<Props> = ({
         </div>
 
         {/* STATUS BENTROK */}
-        <div className="min-w-0">
-          {conflict ? (
-            <button
-              type="button"
-              onClick={() => onOpenConflict(item)}
-              className="group/conflict w-full rounded-xl border border-error/30 bg-error/10 px-3 py-3 text-left transition hover:border-error/50 hover:bg-error/15 hover:shadow-sm"
-            >
-              <div className="flex items-start gap-2.5">
-                <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-error/15 text-error">
-                  <AlertTriangle className="h-4 w-4" />
-                </span>
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wide text-error">
-                      Bentrok dengan
-                    </span>
-
-                    <ChevronRight className="h-4 w-4 shrink-0 text-error/60 transition-transform group-hover/conflict:translate-x-0.5" />
-                  </div>
-
-                  {firstConflict ? (
-                    <>
-                      <p className="mt-1 truncate text-sm font-semibold text-error">
-                        {firstConflict.nama_prodi || "Prodi belum tersedia"}
-                      </p>
-
-                      <p className="mt-1 truncate text-xs text-error/80">
-                        {getMkName(firstConflict)}
-                      </p>
-
-                      {conflictItems.length > 1 && (
-                        <p className="mt-1 text-xs font-medium text-error/80">
-                          +{conflictItems.length - 1} jadwal lainnya
-                        </p>
-                      )}
-                    </>
-                  ) : (
-                    <p className="mt-1 text-xs leading-relaxed text-error/80">
-                      Klik untuk melihat detail bentrok.
-                    </p>
-                  )}
-                </div>
-              </div>
-            </button>
-          ) : (
-            <div className="badge badge-success gap-1.5 py-3 text-xs font-semibold">
-              <CheckCircle2 className="h-4 w-4" />
-              Aman
-            </div>
-          )}
-        </div>
+        <div className="min-w-0"></div>
 
         {/* AKSI DESKTOP */}
         <div className="hidden items-center justify-end gap-1 md:flex">

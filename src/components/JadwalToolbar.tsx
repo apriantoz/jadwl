@@ -31,7 +31,7 @@ export const JadwalToolbar: React.FC<Props> = ({
       <div className="card-body flex flex-col gap-4 p-4 sm:p-5">
         {/* Pencarian */}
         <div className="relative w-full min-w-0">
-          <label className="input input-bordered flex h-12 w-full items-center gap-3 rounded-xl">
+          <label className="input flex h-12 w-full items-center gap-3">
             <Search className="h-5 w-5 shrink-0 text-base-content/50" />
 
             <input
@@ -49,15 +49,15 @@ export const JadwalToolbar: React.FC<Props> = ({
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-center">
           {/* Filter Hari */}
           <label className="form-control min-w-0">
-            <span className="mb-1.5 text-sm font-semibold text-base-content/70">
+            <label className="text-sm font-semibold text-base-content/70">
               Filter Hari
-            </span>
+            </label>
 
             <select
               value={dayFilter}
               onChange={(e) => onDayFilterChange(e.target.value)}
               aria-label="Filter berdasarkan hari"
-              className="select select-bordered w-full text-base"
+              className="select w-full"
             >
               <option value="Semua Hari">Semua Hari</option>
 
@@ -71,15 +71,15 @@ export const JadwalToolbar: React.FC<Props> = ({
 
           {/* Filter Ruangan */}
           <label className="form-control min-w-0">
-            <span className="mb-1.5 text-sm font-semibold text-base-content/70">
+            <label className="font-semibold text-base-content/70">
               Filter Ruangan
-            </span>
+            </label>
 
             <select
               value={roomFilter}
               onChange={(e) => onRoomFilterChange(e.target.value)}
               aria-label="Filter berdasarkan ruangan"
-              className="select select-bordered w-full text-base"
+              className="select w-full"
             >
               <option value="Semua Ruang">Semua Ruang</option>
 

@@ -254,7 +254,7 @@ export default function Dashboard() {
   // ==========================================
 
   return (
-    <main className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+    <main className="mx-auto container space-y-6 px-4 py-6 ">
       {/* Header */}
       <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -285,7 +285,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        {/* <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={() => void refresh()}
@@ -300,7 +300,7 @@ export default function Dashboard() {
             <Plus size={16} />
             Tambah Jadwal
           </Link>
-        </div>
+        </div> */}
       </header>
 
       {/* Pesan error */}
@@ -597,7 +597,7 @@ export default function Dashboard() {
                   </strong>
                 </p>
 
-                <span className="badge badge-success badge-lg">
+                <span className="badge badge-success">
                   {availableRooms.length} ruangan tersedia
                 </span>
               </div>
@@ -792,107 +792,109 @@ export default function Dashboard() {
         </div>
       </section>
 
-      {/* Distribusi jadwal per hari */}
-      <section className="card border border-base-200 bg-base-100 shadow-sm">
-        <div className="card-body p-4 sm:p-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <CalendarDays size={21} />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold text-base-content">
-                Jadwal per Hari
-              </h2>
-              <p className="text-sm text-base-content/60">
-                Distribusi jadwal pada semester aktif.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-5 space-y-4">
-            {dailyStats.map(({ day, count }) => (
-              <div
-                key={day}
-                className="grid grid-cols-[75px_minmax(0,1fr)_35px] items-center gap-3"
-              >
-                <span className="text-sm text-base-content/70">{day}</span>
-
-                <div className="h-3 overflow-hidden rounded-full bg-base-200">
-                  <div
-                    className="h-full rounded-full bg-primary transition-all duration-300"
-                    style={{
-                      width: `${(count / maxDaily) * 100}%`,
-                    }}
-                  />
-                </div>
-
-                <span className="text-right text-sm font-bold tabular-nums text-base-content">
-                  {count}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Penggunaan ruangan */}
-      <section className="card border border-base-200 bg-base-100 shadow-sm">
-        <div className="card-body p-4 sm:p-6">
-          <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Distribusi jadwal per hari */}
+        <section className="card border border-base-200 bg-base-100 shadow-sm">
+          <div className="card-body p-4 sm:p-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-info/10 text-info">
-                <Building2 size={21} />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <CalendarDays size={21} />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-base-content">
-                  Penggunaan Ruangan
+                  Jadwal per Hari
                 </h2>
                 <p className="text-sm text-base-content/60">
-                  Lima ruangan dengan jumlah jadwal terbanyak.
+                  Distribusi jadwal pada semester aktif.
                 </p>
               </div>
             </div>
 
-            <Link
-              to="/master/ruangan"
-              className="link link-primary inline-flex items-center gap-1 text-sm"
-            >
-              Kelola Ruangan
-              <ArrowRight size={14} />
-            </Link>
-          </div>
+            <div className="mt-5 space-y-8">
+              {dailyStats.map(({ day, count }) => (
+                <div
+                  key={day}
+                  className="grid grid-cols-[75px_minmax(0,1fr)_35px] items-center gap-3"
+                >
+                  <span className="text-sm text-base-content/70">{day}</span>
 
-          {roomStats.length > 0 ? (
-            <div className="mt-5 space-y-5">
-              {roomStats.slice(0, 5).map((room) => (
-                <div key={room.id}>
-                  <div className="mb-2 flex items-center justify-between gap-3">
-                    <span className="text-sm font-semibold text-base-content">
-                      {room.name}
-                    </span>
-                    <span className="text-sm text-base-content/60">
-                      {room.count} jadwal
-                    </span>
+                  <div className="h-3 overflow-hidden rounded-full bg-base-200">
+                    <div
+                      className="h-full rounded-full bg-primary transition-all duration-300"
+                      style={{
+                        width: `${(count / maxDaily) * 100}%`,
+                      }}
+                    />
                   </div>
 
-                  <progress
-                    className="progress progress-primary w-full"
-                    value={room.count}
-                    max={maxRoomUsage}
-                  />
+                  <span className="text-right text-sm font-bold tabular-nums text-base-content">
+                    {count}
+                  </span>
                 </div>
               ))}
             </div>
-          ) : (
-            <div className="mt-4 rounded-xl bg-base-200/50 p-5 text-center">
-              <DoorOpen size={26} className="mx-auto text-base-content/30" />
-              <p className="mt-2 text-sm text-base-content/60">
-                Belum ada data ruangan.
-              </p>
+          </div>
+        </section>
+
+        {/* Penggunaan ruangan */}
+        <section className="card border border-base-200 bg-base-100 shadow-sm">
+          <div className="card-body p-4 sm:p-6">
+            <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-info/10 text-info">
+                  <Building2 size={21} />
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold text-base-content">
+                    Penggunaan Ruangan
+                  </h2>
+                  <p className="text-sm text-base-content/60">
+                    Lima ruangan dengan jumlah jadwal terbanyak.
+                  </p>
+                </div>
+              </div>
+
+              <Link
+                to="/master/ruangan"
+                className="link link-primary inline-flex items-center gap-3 text-sm"
+              >
+                Kelola Ruangan
+                <ArrowRight size={14} />
+              </Link>
             </div>
-          )}
-        </div>
-      </section>
+
+            {roomStats.length > 0 ? (
+              <div className="mt-5 space-y-5">
+                {roomStats.slice(0, 5).map((room) => (
+                  <div key={room.id}>
+                    <div className="mb-2 flex items-center justify-between gap-3">
+                      <span className="text-sm font-semibold text-base-content">
+                        {room.name}
+                      </span>
+                      <span className="text-sm text-base-content/60">
+                        {room.count} jadwal
+                      </span>
+                    </div>
+
+                    <progress
+                      className="progress progress-primary w-full"
+                      value={room.count}
+                      max={maxRoomUsage}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-4 rounded-xl bg-base-200/50 p-5 text-center">
+                <DoorOpen size={26} className="mx-auto text-base-content/30" />
+                <p className="mt-2 text-sm text-base-content/60">
+                  Belum ada data ruangan.
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      </div>
 
       {/* Aksi cepat */}
       <section>

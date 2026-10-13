@@ -19,7 +19,7 @@ const navLinks = [
     label: "Master Data",
     icon: Database,
     children: [
-      { to: "/semester", icon: GraduationCap, label: "Semester" },
+      { to: "/master/semester", label: "Semester" },
       { to: "/master/ruangan", label: "Ruangan" },
       { to: "/master/prodi", label: "Program Studi" },
       { to: "/master/mk", label: "Mata Kuliah" },

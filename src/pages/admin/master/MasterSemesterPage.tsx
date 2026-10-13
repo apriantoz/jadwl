@@ -1,8 +1,8 @@
 // src/pages/MasterSemesterPage.tsx
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { supabase } from "../../lib/supabaseClient";
-import type { MasterSemester } from "../../types/master";
+import { supabase } from "../../../lib/supabaseClient";
+import type { MasterSemester } from "../../../types/master";
 import {
   Plus,
   Edit,
@@ -335,8 +335,8 @@ export const MasterSemesterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-full">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+    <div>
+      <div>
         {/* Header */}
         <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
