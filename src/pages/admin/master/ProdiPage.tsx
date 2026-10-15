@@ -209,7 +209,7 @@ export const ProdiPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="card-body p-0">
+        <div className="card-body p-0 min-h-90 flex flex-col justify-center">
           {loading ? (
             <div className="flex min-h-[320px] flex-col items-center justify-center">
               <span className="loading loading-spinner loading-md text-primary"></span>
