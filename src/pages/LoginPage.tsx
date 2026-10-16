@@ -64,7 +64,11 @@ function LoginPage() {
               className="btn btn-neutral mt-4 w-full"
               disabled={loading}
             >
-              {loading ? "Sedang Masuk..." : "Login"}
+              {loading ? (
+                <span className="loading loading-spinner loading-sm" />
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
         </fieldset>

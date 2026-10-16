@@ -10,7 +10,6 @@ import { RuanganPage } from "../pages/admin/master/RuanganPage";
 import { ProdiPage } from "../pages/admin/master/ProdiPage";
 import { MataKuliahPage } from "../pages/admin/master/MataKuliahPage";
 import { MasterLayout } from "../layouts/MasterLayout";
-import JadwalPublikPage from "../pages/JadwalPublikPage";
 import MasterSemesterPage from "../pages/admin/master/MasterSemesterPage";
 import PinjamRuang from "../pages/PinjamRuang";
 import PengajuanPeminjaman from "../pages/admin/PengajuanPeminjaman";
@@ -22,7 +21,6 @@ export function AppRoutes() {
       {/* Halaman Publik */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/homepage" element={<JadwalPublikPage />} />
         <Route path="/pinjam" element={<PinjamRuang />} />
       </Route>
 
