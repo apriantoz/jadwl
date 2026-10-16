@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   Edit3,
   Layers3,
-  Loader2,
   MapPin,
   Plus,
   RefreshCw,

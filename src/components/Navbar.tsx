@@ -1,9 +1,7 @@
 import { useEffect, useRef } from "react";
 import {
-  CalendarHeart,
   CalendarDays,
   Database,
-  GraduationCap,
   Globe2,
   LogOut,
   Menu,

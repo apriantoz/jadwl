@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarDays, LandmarkIcon, Plus, RefreshCw } from "lucide-react";
+import { LandmarkIcon, Plus, RefreshCw } from "lucide-react";
 
 interface Props {
   loading: boolean;

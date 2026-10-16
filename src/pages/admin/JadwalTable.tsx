@@ -369,7 +369,7 @@ const JadwalTable: React.FC = () => {
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold">Gagal memuat data</p>
-              <p className="mt-0.5 break-words text-xs">{error}</p>
+              <p className="mt-0.5 wrap-break-word text-xs">{error}</p>
             </div>
             <button
               type="button"

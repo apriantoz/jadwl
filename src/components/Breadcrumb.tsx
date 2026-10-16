@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { ChevronRight, Home } from "lucide-react";
+import { Home } from "lucide-react";
 
 const breadcrumbLabels: Record<string, string> = {
   homepage: "Jadwal Publik",

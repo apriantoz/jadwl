@@ -6,7 +6,6 @@ import {
   Building2,
   Edit3,
   Layers3,
-  Loader2,
   Plus,
   RefreshCw,
   Search,
