@@ -1,20 +1,16 @@
 import React from "react";
 import {
-  AlertTriangle,
   BookmarkIcon,
-  BookOpen,
   CheckCircle2,
-  ChevronRight,
   Edit,
   FileText,
   MapPin,
-  MessageCircleWarningIcon,
   Trash2,
   TriangleAlertIcon,
 } from "lucide-react";
 
 import {
-  getBentrokDetails,
+  //getBentrokDetails,
   getMkName,
   getRuangName,
 } from "../utils/scheduleHelpers";
@@ -34,7 +30,7 @@ interface Props {
 
 export const JadwalScheduleRow: React.FC<Props> = ({
   item,
-  jadwalList,
+  //jadwalList,
   getSemesterName,
   isConflict,
   onOpenConflict,
@@ -42,8 +38,8 @@ export const JadwalScheduleRow: React.FC<Props> = ({
   onDelete,
 }) => {
   const conflict = isConflict(item);
-  const conflictItems = getBentrokDetails(item, jadwalList) || [];
-  const firstConflict = conflictItems[0] as JadwalItem | undefined;
+  //const conflictItems = getBentrokDetails(item, jadwalList) || [];
+  //const firstConflict = conflictItems[0] as JadwalItem | undefined;
   const id = getItemId(item) ?? 0;
 
   return (
