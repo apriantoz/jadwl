@@ -7,6 +7,8 @@ import {
   Globe2,
   LogOut,
   Menu,
+  HandshakeIcon,
+  LandmarkIcon,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
@@ -14,7 +16,7 @@ import { supabase } from "../lib/supabaseClient";
 const navLinks = [
   { to: "/dashboard", icon: Globe2, label: "Dashboard" },
   { to: "/jadwal", icon: CalendarDays, label: "Jadwal" },
-  { to: "/pengajuan-peminjaman", icon: Database, label: "Peminjaman" },
+  { to: "/pengajuan-peminjaman", icon: HandshakeIcon, label: "Peminjaman" },
   {
     label: "Master Data",
     icon: Database,
@@ -117,7 +119,7 @@ function Navbar() {
           to="/dashboard"
           className="flex items-center gap-2 text-2xl font-bold"
         >
-          <CalendarHeart className="text-primary" />
+          <LandmarkIcon className="text-primary" />
           JadwL
         </Link>
       </div>

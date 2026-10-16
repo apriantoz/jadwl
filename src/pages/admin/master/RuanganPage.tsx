@@ -14,6 +14,7 @@ import {
   Users,
   X,
   Save,
+  LandmarkIcon,
 } from "lucide-react";
 import type { Ruangan, TipeRuang } from "../../../types/master";
 
@@ -158,7 +159,18 @@ export const RuanganPage: React.FC = () => {
   return (
     <>
       {/* Toolbar */}
-      <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end mb-5">
+      <section className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        {/* Judul dan Deskripsi */}
+        <div className="min-w-0">
+          <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
+            <LandmarkIcon size={17} />
+            Gedung Desain Hub ISI Bali
+          </div>
+
+          <h1 className="text-2xl font-bold tracking-tight text-base-content sm:text-3xl">
+            Kelola Ruangan
+          </h1>
+        </div>
         <div className="flex items-center gap-2">
           <button
             type="button"

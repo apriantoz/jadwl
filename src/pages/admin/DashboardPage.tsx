@@ -18,6 +18,7 @@ import {
   CalendarCheck,
   Building2,
   Info,
+  LandmarkIcon,
 } from "lucide-react";
 
 import { useJadwalData } from "../../hooks/useJadwalData";
@@ -259,15 +260,15 @@ export default function Dashboard() {
       <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
-            <GraduationCap size={17} />
-            Administrasi Akademik
+            <LandmarkIcon size={17} />
+            Gedung Desain Hub ISI Bali
           </div>
 
           <h1 className="text-2xl font-bold tracking-tight text-base-content sm:text-3xl">
             Dashboard
           </h1>
 
-          <p className="mt-1 text-sm text-base-content/60">
+          <p className="mt-1 text-sm leading-relaxed text-base-content/70">
             Ringkasan aktivitas perkuliahan dan penggunaan ruangan.
           </p>
 
@@ -446,14 +447,12 @@ export default function Dashboard() {
                       {ongoing && (
                         <span className="badge badge-success gap-1">
                           <CheckCircle2 size={12} />
-                          Sedang berlangsung
+                          Berlangsung
                         </span>
                       )}
 
                       {!ongoing && !finished && (
-                        <span className="badge badge-primary">
-                          Akan dimulai
-                        </span>
+                        <span className="badge badge-primary">Selanjutnya</span>
                       )}
 
                       {finished && (

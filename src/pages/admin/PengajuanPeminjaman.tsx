@@ -3,6 +3,7 @@ import type { ChangeEvent } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import type { Prodi, Ruangan } from "../../types/master";
 import type { PinjamRuang, StatusPinjamRuang } from "../../types/pinjamRuang";
+import { LandmarkIcon } from "lucide-react";
 
 type FilterStatus = "semua" | StatusPinjamRuang;
 
@@ -201,24 +202,23 @@ export default function PengajuanPeminjaman() {
   }
 
   return (
-    <main className="min-h-screen bg-base-200 p-4 md:p-8">
-      <div className="mx-auto max-w-7xl space-y-6">
+    <main className="min-h-screen bg-base-200">
+      <div className="container mx-auto px-4 py-6 space-y-6">
         {/* Header */}
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-          <div>
-            <div className="breadcrumbs text-sm">
-              <ul>
-                <li>Admin</li>
-                <li>Pengajuan Peminjaman</li>
-              </ul>
+        <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          {/* Judul dan Deskripsi */}
+          <div className="min-w-0">
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
+              <LandmarkIcon size={17} />
+              Gedung Desain Hub ISI Bali
             </div>
 
-            <h1 className="mt-2 text-2xl font-bold md:text-3xl">
-              Pengajuan Peminjaman Ruang
+            <h1 className="text-2xl font-bold tracking-tight text-base-content sm:text-3xl">
+              Peminjaman Ruangan
             </h1>
 
-            <p className="mt-2 text-sm text-base-content/60">
-              Periksa identitas peminjam, jadwal, dan keputusan peminjaman.
+            <p className="mt-1 text-sm leading-relaxed text-base-content/70">
+              Kelola pengajuan peminjaman ruangan.
             </p>
           </div>
 
@@ -359,6 +359,7 @@ export default function PengajuanPeminjaman() {
                     <tr>
                       <th>Peminjam</th>
                       <th>NIM</th>
+                      <th>No. WhatsApp</th>
                       <th>Program Studi</th>
                       <th>Ruang</th>
                       <th>Jadwal Peminjaman</th>
@@ -382,6 +383,7 @@ export default function PengajuanPeminjaman() {
                         <td className="whitespace-nowrap font-mono text-sm">
                           {item.nim || "—"}
                         </td>
+                        <td>{item.wa}</td>
 
                         <td>{item.prodiNama}</td>
 

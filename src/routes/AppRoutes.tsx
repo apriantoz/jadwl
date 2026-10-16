@@ -14,12 +14,13 @@ import JadwalPublikPage from "../pages/JadwalPublikPage";
 import MasterSemesterPage from "../pages/admin/master/MasterSemesterPage";
 import PinjamRuang from "../pages/PinjamRuang";
 import PengajuanPeminjaman from "../pages/admin/PengajuanPeminjaman";
+import PublicLayout from "../layouts/PublicLayout";
 
 export function AppRoutes() {
   return (
     <Routes>
       {/* Halaman Publik */}
-      <Route element={<MasterLayout />}>
+      <Route element={<PublicLayout />}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/homepage" element={<JadwalPublikPage />} />
         <Route path="/pinjam" element={<PinjamRuang />} />

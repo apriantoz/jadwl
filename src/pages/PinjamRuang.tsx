@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
 import { supabase } from "../lib/supabaseClient";
 import type { Prodi, Ruangan } from "../types/master";
 import type { CreatePinjamRuang } from "../types/pinjamRuang";
+import { InfoIcon } from "lucide-react";
 
 export default function PinjamRuang() {
   const [prodiList, setProdiList] = useState<Prodi[]>([]);
@@ -14,6 +15,7 @@ export default function PinjamRuang() {
   const [form, setForm] = useState<CreatePinjamRuang>({
     nama: "",
     nim: "",
+    wa: "",
     prodi_id: 0,
     ruang_id: 0,
     tujuan: "",
@@ -128,6 +130,7 @@ export default function PinjamRuang() {
     try {
       const payload: CreatePinjamRuang = {
         nama: form.nama.trim(),
+        wa: form.wa.trim(),
         nim: form.nim.trim(),
         tujuan: form.tujuan.trim(),
         prodi_id: form.prodi_id,
@@ -151,6 +154,7 @@ export default function PinjamRuang() {
       setForm({
         nama: "",
         nim: "",
+        wa: "",
         prodi_id: 0,
         ruang_id: 0,
         tujuan: "",
@@ -169,8 +173,8 @@ export default function PinjamRuang() {
   }
 
   return (
-    <main className="min-h-screen bg-base-200 px-4 py-8 md:py-12">
-      <div className="mx-auto max-w-3xl">
+    <main className=" min-h-screen px-4 py-8 md:py-12">
+      <div className="mx-auto max-w-2xl">
         <header className="mb-8 text-center">
           <div className="badge badge-primary badge-outline mb-4">
             LAYANAN PEMINJAMAN
@@ -181,7 +185,8 @@ export default function PinjamRuang() {
           </h1>
 
           <p className="mx-auto mt-3 max-w-xl text-base-content/70">
-            Silakan isi formulir berikut untuk mengajukan peminjaman ruang.
+            Isi formulir berikut untuk mengajukan peminjaman ruang lab Desain
+            Hub.
           </p>
         </header>
 
@@ -190,7 +195,7 @@ export default function PinjamRuang() {
             <div className="mb-2">
               <h2 className="text-xl font-semibold">Formulir Pengajuan</h2>
               <p className="mt-1 text-sm text-base-content/60">
-                Lengkapi data peminjam dan jadwal penggunaan ruang.
+                Lengkapi data peminjam.
               </p>
             </div>
 
@@ -198,7 +203,7 @@ export default function PinjamRuang() {
               <div role="status" className="alert alert-success">
                 <span>
                   Pengajuan berhasil dikirim! Status awal pengajuan adalah
-                  pending dan akan diproses oleh admin.
+                  pending. Anda akan dihubungi oleh Admin.
                 </span>
               </div>
             )}
@@ -227,16 +232,37 @@ export default function PinjamRuang() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="form-control">
+                  <label className="label" htmlFor="nim">
+                    <span className="label-text">NIM</span>
+                  </label>
+
+                  <input
+                    id="nim"
+                    name="nim"
+                    type="number"
+                    inputMode="numeric"
+                    autoComplete="off"
+                    className="input w-full"
+                    placeholder="Masukkan NIM mahasiswa"
+                    value={form.nim}
+                    onChange={handleChange}
+                    minLength={5}
+                    maxLength={30}
+                    required
+                    disabled={submitting}
+                  />
+                </div>
+                <div className="form-control">
                   <label className="label" htmlFor="nama">
-                    <span className="label-text font-medium">
-                      Nama peminjam
+                    <span className="label-text">
+                      Nama peminjam/penanggung jawab
                     </span>
                   </label>
                   <input
                     id="nama"
                     name="nama"
                     type="text"
-                    className="input input-bordered w-full"
+                    className="input w-full"
                     placeholder="Masukkan nama lengkap"
                     value={form.nama}
                     onChange={handleChange}
@@ -246,23 +272,20 @@ export default function PinjamRuang() {
                     disabled={submitting}
                   />
                 </div>
-
                 <div className="form-control">
                   <label className="label" htmlFor="nim">
-                    <span className="label-text font-medium">
-                      NIM Mahasiswa
-                    </span>
+                    <span className="label-text">WhatssApp</span>
                   </label>
 
                   <input
-                    id="nim"
-                    name="nim"
-                    type="text"
+                    id="wa"
+                    name="wa"
+                    type="number"
                     inputMode="numeric"
                     autoComplete="off"
-                    className="input input-bordered w-full"
-                    placeholder="Masukkan NIM mahasiswa"
-                    value={form.nim}
+                    className="input w-full"
+                    placeholder="Masukkan WA mahasiswa"
+                    value={form.wa}
                     onChange={handleChange}
                     minLength={5}
                     maxLength={30}
@@ -273,14 +296,12 @@ export default function PinjamRuang() {
 
                 <div className="form-control">
                   <label className="label" htmlFor="prodi_id">
-                    <span className="label-text font-medium">
-                      Program studi
-                    </span>
+                    <span className="label-text">Program studi</span>
                   </label>
                   <select
                     id="prodi_id"
                     name="prodi_id"
-                    className="select select-bordered w-full"
+                    className="select w-full"
                     value={form.prodi_id || ""}
                     onChange={handleChange}
                     required
@@ -307,14 +328,12 @@ export default function PinjamRuang() {
 
                 <div className="form-control">
                   <label className="label" htmlFor="ruang_id">
-                    <span className="label-text font-medium">
-                      Ruang yang dipinjam
-                    </span>
+                    <span className="label-text">Ruang yang dipinjam</span>
                   </label>
                   <select
                     id="ruang_id"
                     name="ruang_id"
-                    className="select select-bordered w-full"
+                    className="select w-full"
                     value={form.ruang_id || ""}
                     onChange={handleChange}
                     required
@@ -351,15 +370,13 @@ export default function PinjamRuang() {
 
                 <div className="form-control">
                   <label className="label" htmlFor="tanggal_pinjam">
-                    <span className="label-text font-medium">
-                      Tanggal peminjaman
-                    </span>
+                    <span className="label-text">Tanggal peminjaman</span>
                   </label>
                   <input
                     id="tanggal_pinjam"
                     name="tanggal_pinjam"
                     type="date"
-                    className="input input-bordered w-full"
+                    className="input w-full"
                     value={form.tanggal_pinjam}
                     min={today}
                     onChange={handleChange}
@@ -368,7 +385,7 @@ export default function PinjamRuang() {
                   />
                   {hariPinjam && (
                     <label className="label">
-                      <span className="label-text-alt font-medium text-primary">
+                      <span className="label-text-alt text-primary">
                         Hari: {hariPinjam}
                       </span>
                     </label>
@@ -378,13 +395,13 @@ export default function PinjamRuang() {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="form-control">
                     <label className="label" htmlFor="jam_mulai">
-                      <span className="label-text font-medium">Jam mulai</span>
+                      <span className="label-text">Jam mulai</span>
                     </label>
                     <input
                       id="jam_mulai"
                       name="jam_mulai"
                       type="time"
-                      className="input input-bordered w-full"
+                      className="input w-full"
                       value={form.jam_mulai}
                       onChange={handleChange}
                       required
@@ -394,15 +411,13 @@ export default function PinjamRuang() {
 
                   <div className="form-control">
                     <label className="label" htmlFor="jam_selesai">
-                      <span className="label-text font-medium">
-                        Jam selesai
-                      </span>
+                      <span className="label-text">Jam selesai</span>
                     </label>
                     <input
                       id="jam_selesai"
                       name="jam_selesai"
                       type="time"
-                      className="input input-bordered w-full"
+                      className="input w-full"
                       value={form.jam_selesai}
                       min={form.jam_mulai || undefined}
                       max="16:00"
@@ -413,23 +428,21 @@ export default function PinjamRuang() {
                   </div>
                 </div>
 
-                <div className="alert alert-info text-sm">
+                <div className="alert alert-info text-sm justify-center">
                   <span>
-                    Waktu peminjaman bebas. Jam selesai maksimal pukul 16.00
-                    WITA dan harus setelah jam mulai.
+                    Waktu peminjaman mulai pukul 08.00. Jam selesai maksimal
+                    pukul 16.00.
                   </span>
                 </div>
 
                 <div className="form-control">
                   <label className="label" htmlFor="tujuan">
-                    <span className="label-text font-medium">
-                      Tujuan peminjaman
-                    </span>
+                    <span className="label-text">Tujuan peminjaman</span>
                   </label>
                   <textarea
                     id="tujuan"
                     name="tujuan"
-                    className="textarea textarea-bordered min-h-32 w-full"
+                    className="textarea min-h-32 w-full"
                     placeholder="Jelaskan tujuan peminjaman ruang..."
                     value={form.tujuan}
                     onChange={handleChange}
@@ -444,17 +457,17 @@ export default function PinjamRuang() {
                   </label>
                 </div>
 
-                <div className="rounded-xl bg-base-200 p-4">
+                <div className="card bg-base-200 p-4">
                   <div className="flex items-start gap-3">
-                    <span className="text-xl" aria-hidden="true">
-                      ℹ️
+                    <span className="text-xl">
+                      <InfoIcon />
                     </span>
                     <div>
                       <p className="font-medium">Informasi pengajuan</p>
                       <p className="mt-1 text-sm text-base-content/70">
                         Pengajuan berstatus pending sampai admin memberikan
-                        keputusan. Pastikan tanggal dan waktu peminjaman sudah
-                        benar.
+                        keputusan melalui WhatssApp. Pastikan tanggal, waktu,
+                        dan nomor WhatssApp sudah benar.
                       </p>
                     </div>
                   </div>

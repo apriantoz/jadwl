@@ -6,6 +6,7 @@ import {
   CalendarDays,
   Clock,
   Info,
+  LandmarkIcon,
   MapPin,
   RefreshCw,
   Search,
@@ -161,10 +162,10 @@ const JadwalPublikPage: React.FC = () => {
               <div>
                 <div className="mb-2 flex items-center gap-2">
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <CalendarDays className="h-4 w-4" />
+                    <LandmarkIcon className="h-4 w-4" />
                   </span>
                   <span className="text-xs font-bold uppercase tracking-wider text-primary">
-                    Jadwal Akademik
+                    Gedung Desain Hub ISI Bali
                   </span>
                 </div>
 
@@ -173,8 +174,7 @@ const JadwalPublikPage: React.FC = () => {
                 </h1>
 
                 <p className="mt-1 max-w-2xl text-sm text-base-content/60">
-                  Lihat jadwal kuliah berdasarkan hari, ruangan, dan mata kuliah
-                  yang tersedia pada semester aktif.
+                  Lihat jadwal kuliah yang berlangsung di Gedung Desain Hub.
                 </p>
               </div>
 
@@ -201,12 +201,12 @@ const JadwalPublikPage: React.FC = () => {
 
               <div className="badge badge-ghost gap-1.5 py-3 font-medium">
                 <CalendarDays className="h-3.5 w-3.5" />
-                {filtered.length} jadwal tampil
+                {filtered.length} jadwal
               </div>
 
               <div className="badge badge-ghost gap-1.5 py-3 font-medium">
                 <MapPin className="h-3.5 w-3.5" />
-                {roomsInUse} ruangan dipakai
+                {roomsInUse} ruangan
               </div>
             </div>
           </div>
@@ -355,7 +355,7 @@ const JadwalPublikPage: React.FC = () => {
                 <div className="flex items-center justify-between border-b border-base-200 px-5 py-3">
                   <div className="flex items-center gap-2.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-primary" />
-                    <span className="text-sm font-bold uppercase tracking-wider text-base-content">
+                    <span className="font-bold uppercase tracking-wider text-base-content">
                       {group.day}
                     </span>
                   </div>
@@ -381,10 +381,10 @@ const JadwalPublikPage: React.FC = () => {
                       >
                         {/* Waktu */}
                         <div className="w-24 shrink-0 self-start">
-                          <p className="text-sm font-bold text-base-content">
+                          <p className=" font-bold text-base-content">
                             {toTimeValue(item.jam_mulai) || "--:--"}
                           </p>
-                          <p className="mt-0.5 text-[11px] text-base-content/40">
+                          <p className="mt-0.5 text-xs text-base-content/40">
                             s.d. {toTimeValue(item.jam_selesai) || "--:--"}
                           </p>
                         </div>
@@ -392,7 +392,7 @@ const JadwalPublikPage: React.FC = () => {
                         {/* Info */}
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
-                            <p className="text-sm font-semibold text-base-content">
+                            <p className=" font-semibold text-base-content">
                               {getMkName(item)}
                             </p>
 
@@ -406,12 +406,12 @@ const JadwalPublikPage: React.FC = () => {
                             )}
                           </div>
 
-                          <p className="truncate text-[11px] text-base-content/50">
+                          <p className="truncate text-xs text-base-content/50">
                             {item.nama_prodi || "Prodi belum tersedia"}
                             {item.kode_mk && ` • ${item.kode_mk}`}
                           </p>
 
-                          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-base-content/60">
+                          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-base-content/60">
                             <span className="inline-flex items-center gap-1">
                               <MapPin className="h-3 w-3" />
                               {getRuangName(item)}
@@ -448,10 +448,10 @@ const JadwalPublikPage: React.FC = () => {
                       <MapPin className="h-4 w-4" />
                     </span>
                     <div>
-                      <p className="text-sm font-bold text-base-content">
+                      <p className=" font-bold text-base-content">
                         {room.nama}
                       </p>
-                      <p className="text-[10px] text-base-content/50">
+                      <p className="text-xs text-base-content/50">
                         {items.length} jadwal penggunaan
                       </p>
                     </div>
@@ -475,7 +475,7 @@ const JadwalPublikPage: React.FC = () => {
                       key={day}
                       className="border-b border-base-200 last:border-b-0"
                     >
-                      <div className="bg-base-200/50 px-5 py-2 text-[10px] font-bold uppercase tracking-wider text-base-content/60">
+                      <div className="bg-base-200/50 px-5 py-2 text-xs font-bold uppercase tracking-wider text-base-content/60">
                         {day}
                       </div>
 
@@ -499,10 +499,10 @@ const JadwalPublikPage: React.FC = () => {
                               className="group flex w-full items-center gap-4 px-5 py-3 text-left transition hover:bg-base-200/60"
                             >
                               <div className="w-24 shrink-0">
-                                <p className="text-sm font-bold text-base-content">
+                                <p className=" font-bold text-base-content">
                                   {toTimeValue(item.jam_mulai) || "--:--"}
                                 </p>
-                                <p className="mt-0.5 text-[11px] text-base-content/40">
+                                <p className="mt-0.5 text-xs text-base-content/40">
                                   s.d.{" "}
                                   {toTimeValue(item.jam_selesai) || "--:--"}
                                 </p>
@@ -510,7 +510,7 @@ const JadwalPublikPage: React.FC = () => {
 
                               <div className="min-w-0 flex-1">
                                 <div className="flex flex-wrap items-center gap-2">
-                                  <p className="text-sm font-semibold text-base-content">
+                                  <p className="font-semibold text-base-content">
                                     {getMkName(item)}
                                   </p>
                                   {(item.is_bentrok || isBentrok) && (
@@ -520,7 +520,7 @@ const JadwalPublikPage: React.FC = () => {
                                     </span>
                                   )}
                                 </div>
-                                <p className="truncate text-[11px] text-base-content/50">
+                                <p className="truncate text-xs text-base-content/50">
                                   {item.nama_prodi || "Prodi belum tersedia"}
                                   {item.kode_mk && ` • ${item.kode_mk}`}
                                 </p>
@@ -538,7 +538,7 @@ const JadwalPublikPage: React.FC = () => {
         )}
 
         {/* Footer note */}
-        <p className="mt-6 text-center text-[11px] text-base-content/40">
+        <p className="mt-6 text-center text-xs text-base-content/40">
           Jadwal dapat berubah sewaktu-waktu. Hubungi bagian akademik untuk
           informasi lebih lanjut.
         </p>

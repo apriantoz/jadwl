@@ -17,6 +17,7 @@ import {
   GraduationCap,
   X,
   Info,
+  LandmarkIcon,
 } from "lucide-react";
 
 type SemesterFormData = {
@@ -338,20 +339,18 @@ export const MasterSemesterPage: React.FC = () => {
     <div>
       <div>
         {/* Header */}
-        <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
-                <GraduationCap className="h-4 w-4" />
-              </span>
-              Administrasi Akademik
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
+              <LandmarkIcon size={17} />
+              Gedung Desain Hub ISI Bali
             </div>
 
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl text-base-content">
+            <h1 className="text-2xl font-bold tracking-tight text-base-content sm:text-3xl">
               Master Semester
             </h1>
 
-            <p className="mt-1 max-w-2xl text-sm leading-6 text-base-content/60">
+            <p className="mt-1 text-sm leading-relaxed text-base-content/70">
               Atur periode semester dan tentukan semester yang sedang aktif
               untuk operasional akademik.
             </p>

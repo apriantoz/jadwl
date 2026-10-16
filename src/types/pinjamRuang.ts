@@ -7,6 +7,7 @@ export interface PinjamRuang {
   prodi_id: number;
   nama: string;
   nim: string;
+  wa: string;
   tujuan: string;
   status: StatusPinjamRuang;
 
@@ -20,6 +21,7 @@ export interface CreatePinjamRuang {
   ruang_id: number;
   prodi_id: number;
   nama: string;
+  wa: string;
   nim: string;
   tujuan: string;
   tanggal_pinjam: string;

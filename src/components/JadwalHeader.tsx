@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarDays, Plus, RefreshCw } from "lucide-react";
+import { CalendarDays, LandmarkIcon, Plus, RefreshCw } from "lucide-react";
 
 interface Props {
   loading: boolean;
@@ -16,21 +16,16 @@ export const JadwalHeader: React.FC<Props> = ({
     <header className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
       {/* Judul dan Deskripsi */}
       <div className="min-w-0">
-        <div className="mb-2.5 flex items-center gap-2.5">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            <CalendarDays className="h-5 w-5" />
-          </span>
-
-          <span className="text-sm font-bold uppercase tracking-wide text-primary">
-            Schedule Workspace
-          </span>
+        <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
+          <LandmarkIcon size={17} />
+          Gedung Desain Hub ISI Bali
         </div>
 
         <h1 className="text-2xl font-bold tracking-tight text-base-content sm:text-3xl">
           Kelola Jadwal
         </h1>
 
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/60 sm:text-base">
+        <p className="mt-1 text-sm leading-relaxed text-base-content/70">
           Atur jadwal perkuliahan, pantau bentrok, dan kelola penggunaan ruangan
           dengan lebih mudah.
         </p>

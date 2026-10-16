@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import Navbar from "../components/Navbar";
+import Breadcrumb from "../components/Breadcrumb";
 
 export function ProtectedRoute() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
