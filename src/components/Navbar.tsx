@@ -14,7 +14,7 @@ import { supabase } from "../lib/supabaseClient";
 const navLinks = [
   { to: "/dashboard", icon: Globe2, label: "Dashboard" },
   { to: "/jadwal", icon: CalendarDays, label: "Jadwal" },
-  { to: "/#", icon: Database, label: "Next" },
+  { to: "/pengajuan-peminjaman", icon: Database, label: "Peminjaman" },
   {
     label: "Master Data",
     icon: Database,

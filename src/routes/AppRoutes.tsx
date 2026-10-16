@@ -12,6 +12,8 @@ import { MataKuliahPage } from "../pages/admin/master/MataKuliahPage";
 import { MasterLayout } from "../layouts/MasterLayout";
 import JadwalPublikPage from "../pages/JadwalPublikPage";
 import MasterSemesterPage from "../pages/admin/master/MasterSemesterPage";
+import PinjamRuang from "../pages/PinjamRuang";
+import PengajuanPeminjaman from "../pages/admin/PengajuanPeminjaman";
 
 export function AppRoutes() {
   return (
@@ -20,6 +22,7 @@ export function AppRoutes() {
       <Route element={<MasterLayout />}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/homepage" element={<JadwalPublikPage />} />
+        <Route path="/pinjam" element={<PinjamRuang />} />
       </Route>
 
       {/* Rute khusus tamu (kalau sudah login, dilarang masuk ke sini) */}
@@ -31,6 +34,7 @@ export function AppRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/jadwal" element={<JadwalTable />} />
+        <Route path="/pengajuan-peminjaman" element={<PengajuanPeminjaman />} />
 
         {/* Master Data — pakai MasterLayout sebagai parent */}
         <Route path="/master" element={<MasterLayout />}>
