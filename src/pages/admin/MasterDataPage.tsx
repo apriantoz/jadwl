@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   BookOpen,
   Building2,
-  CheckCircle2,
   Edit3,
   Layers3,
   Loader2,
