@@ -16,7 +16,6 @@ function LoginPage() {
     try {
       const data = await loginWithEmail(email, password);
       console.log("Login berhasil:", data);
-      // Arahkan ke dashboard, misal:
       window.location.href = "/dashboard";
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -56,12 +55,12 @@ function LoginPage() {
           />
 
           <div className="grid grid-cols-2 gap-4">
-            <Link to="/" className="btn btn-neutral mt-4 w-full">
+            <Link to="/" className="btn btn-primary mt-4 w-full">
               Back
             </Link>
             <button
               type="submit"
-              className="btn btn-neutral mt-4 w-full"
+              className="btn btn-primary mt-4 w-full"
               disabled={loading}
             >
               {loading ? (
